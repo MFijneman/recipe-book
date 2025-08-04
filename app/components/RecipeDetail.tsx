@@ -199,7 +199,7 @@ export default function RecipeDetail({ recipe, onBack }: RecipeDetailProps) {
             ].map((tab) => (
               <button
                 key={tab.id}
-                onClick={() => setActiveTab(tab.id as any)}
+                onClick={() => setActiveTab(tab.id as "ingredients" | "instructions" | "nutrition")}
                 className={`flex-1 flex items-center justify-center space-x-2 py-4 px-6 transition-colors duration-200 ${
                   activeTab === tab.id
                     ? 'bg-stone-100/50 dark:bg-gray-700/50 text-stone-800 dark:text-stone-100 border-b-2 border-stone-600 dark:border-gray-400'

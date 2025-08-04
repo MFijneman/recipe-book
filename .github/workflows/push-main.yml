@@ -1,0 +1,17 @@
+name: 'Push: Main Branch'
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+concurrency: main
+
+jobs:
+  build-container:
+    name: 'Build container image (main)'
+    uses: ./.github/workflows/action-build.yml
+    secrets: inherit
