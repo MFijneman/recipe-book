@@ -12,6 +12,6 @@ concurrency: main
 
 jobs:
   build-container:
-    name: 'Build container image (main)'
+    name: 'Build frontend'
     uses: ./.github/workflows/action-build.yml
     secrets: inherit

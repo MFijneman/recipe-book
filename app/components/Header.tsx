@@ -11,7 +11,7 @@ export default function Header({ recipeCount }: HeaderProps) {
             Discover the Best Recipes
           </h1>
           <p className="text-stone-700 dark:text-stone-300 text-lg max-w-2xl mx-auto leading-relaxed">
-            Discover a curated collection of tried and tested recipes that are sure to impress. Whether you\'re looking for quick weeknight dinners or elaborate weekend feasts, find inspiration and step-by-step guides to recreate delicious meals.
+            Discover a curated collection of tried and tested recipes that are sure to impress. Whether you&#39;re looking for quick weeknight dinners or elaborate weekend feasts, find inspiration and step-by-step guides to recreate delicious meals.
           </p>
           <div className="mt-8 flex justify-center">
             <div className="bg-stone-100/50 dark:bg-gray-700/50 backdrop-blur-sm rounded-2xl px-6 py-3 border border-stone-200/50 dark:border-gray-600/50">
