@@ -1,3 +1,7 @@
+'use client';
+
+import { useTranslation } from '../i18n/useTranslation';
+
 interface SearchFiltersProps {
   searchTerm: string;
   setSearchTerm: (term: string) => void;
@@ -11,6 +15,7 @@ export default function SearchFilters({
   selectedDifficulty,
   setSelectedDifficulty
 }: SearchFiltersProps) {
+  const { t } = useTranslation();
   return (
     <div className="max-w-4xl mx-auto mb-12">
       <div className="bg-stone-100/30 dark:bg-gray-800/30 backdrop-blur-sm rounded-3xl border border-stone-200/50 dark:border-gray-700/50 p-8">
@@ -21,7 +26,7 @@ export default function SearchFilters({
               <input
                 type="text"
                 id="search"
-                placeholder="Search recipes..."
+                placeholder={t('search.placeholder')}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full pl-12 pr-4 py-4 bg-stone-50/80 dark:bg-gray-700/80 backdrop-blur-sm border border-stone-200/50 dark:border-gray-600/50 rounded-2xl focus:ring-4 focus:ring-stone-500/20 dark:focus:ring-gray-500/20 focus:border-stone-600 dark:focus:border-gray-500 transition-all duration-300 text-stone-800 dark:text-stone-200 placeholder-stone-600/60 dark:placeholder-gray-400/60"
@@ -36,6 +41,7 @@ export default function SearchFilters({
 
           {/* Search Button */}
           <button className="bg-stone-700 dark:bg-gray-600 hover:bg-stone-800 dark:hover:bg-gray-700 text-white px-8 py-4 rounded-2xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
+            <span className="sr-only">{t('search.button')}</span>
             <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
@@ -49,10 +55,10 @@ export default function SearchFilters({
               onChange={(e) => setSelectedDifficulty(e.target.value)}
               className="w-full px-4 py-4 bg-stone-50/80 dark:bg-gray-700/80 backdrop-blur-sm border border-stone-200/50 dark:border-gray-600/50 rounded-2xl focus:ring-4 focus:ring-stone-500/20 dark:focus:ring-gray-500/20 focus:border-stone-600 dark:focus:border-gray-500 transition-all duration-300 text-stone-800 dark:text-stone-200 appearance-none cursor-pointer"
             >
-              <option value="All">All Difficulties</option>
-              <option value="Easy">Easy</option>
-              <option value="Medium">Medium</option>
-              <option value="Hard">Hard</option>
+              <option value="All">{t('filter.all.difficulties')}</option>
+              <option value="Easy">{t('filter.easy')}</option>
+              <option value="Medium">{t('filter.medium')}</option>
+              <option value="Hard">{t('filter.hard')}</option>
             </select>
           </div>
         </div>

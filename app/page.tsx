@@ -13,7 +13,6 @@ export default function Home() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedDifficulty, setSelectedDifficulty] = useState('All');
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const [language, setLanguage] = useState('en');
   const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
 
   // Load dark mode preference from localStorage
@@ -36,10 +35,6 @@ export default function Home() {
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
-  };
-
-  const handleLanguageChange = (lang: string) => {
-    setLanguage(lang);
   };
 
   const handleViewRecipe = (recipe: Recipe) => {
@@ -71,8 +66,6 @@ export default function Home() {
         <TopHeader 
           isDarkMode={isDarkMode}
           onToggleDarkMode={toggleDarkMode}
-          language={language}
-          onLanguageChange={handleLanguageChange}
         />
         <RecipeDetail recipe={selectedRecipe} onBack={handleBackToRecipes} />
       </div>
@@ -89,8 +82,6 @@ export default function Home() {
       <TopHeader 
         isDarkMode={isDarkMode}
         onToggleDarkMode={toggleDarkMode}
-        language={language}
-        onLanguageChange={handleLanguageChange}
       />
       
       <Header recipeCount={filteredRecipes.length} />

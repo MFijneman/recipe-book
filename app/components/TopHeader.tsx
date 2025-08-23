@@ -1,25 +1,23 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslation } from '../i18n/useTranslation';
 
 interface TopHeaderProps {
   isDarkMode: boolean;
   onToggleDarkMode: () => void;
-  language: string;
-  onLanguageChange: (lang: string) => void;
 }
 
 export default function TopHeader({ 
   isDarkMode, 
-  onToggleDarkMode, 
-  language, 
-  onLanguageChange 
+  onToggleDarkMode
 }: TopHeaderProps) {
   const [showLanguageMenu, setShowLanguageMenu] = useState(false);
+  const { t, language, changeLanguage } = useTranslation();
 
   const languages = [
-    { code: 'en', name: 'English', flag: '🇺🇸' },
-    { code: 'nl', name: 'Nederlands', flag: '🇳🇱' },
+    { code: 'en', name: t('language.english'), flag: '🇺🇸' },
+    { code: 'nl', name: t('language.dutch'), flag: '🇳🇱' },
   ];
 
   const currentLanguage = languages.find(lang => lang.code === language) || languages[0];
@@ -35,7 +33,7 @@ export default function TopHeader({
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
               </svg>
             </div>
-            <span className="text-xl font-serif font-bold text-stone-800 dark:text-stone-100">RecipeBook</span>
+            <span className="text-xl font-serif font-bold text-stone-800 dark:text-stone-100">{t('app.title')}</span>
           </div>
 
           {/* Right side controls */}
@@ -81,7 +79,7 @@ export default function TopHeader({
                       <button
                         key={lang.code}
                         onClick={() => {
-                          onLanguageChange(lang.code);
+                          changeLanguage(lang.code as 'en' | 'nl');
                           setShowLanguageMenu(false);
                         }}
                         className={`w-full flex items-center space-x-3 px-4 py-2 text-left hover:bg-stone-100/50 dark:hover:bg-gray-700/50 transition-colors duration-200 ${

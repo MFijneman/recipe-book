@@ -4,12 +4,12 @@ const coqAuVin: Recipe = {
   "id": 1,
   "title": "Coq Au Vin",
   "description": "A classic French chicken stew braised with wine, mushrooms, and pearl onions, inspired by Julia Child.",
-  "cookTime": "120 minutes",
-  "difficulty": "Medium",
+  "cookTime": 120,
+  "difficulty": "medium",
   "image": "coq_au_vin.jpg",
   "tags": [
     "dinner",
-    "French",
+    "french",
     "chicken",
     "stew"
   ],
@@ -101,8 +101,8 @@ const coqAuVin: Recipe = {
     "Remove the chicken from the pan then add the beurre manie. Stir it into the sauce and let it thicken. Season to taste with salt and pepper.",
     "Add the chicken back into the pan and top with the cooked bacon and mushrooms. Sprinkle with a little fresh thyme."
   ],
-  "prepTime": "30 minutes",
-  "totalTime": "120 minutes",
+  "prepTime": 30,
+  "totalTime": 120,
   "servings": 4,
   "nutrition": {
     "calories": 0,
