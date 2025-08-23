@@ -15,3 +15,9 @@ jobs:
     name: 'Build frontend'
     uses: ./.github/workflows/action-build.yml
     secrets: inherit
+
+  deploy:
+    name: 'Deploy to AWS'
+    needs: build-container
+    uses: ./.github/workflows/action-deploy.yml
+    secrets: inherit
