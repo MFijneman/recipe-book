@@ -16,6 +16,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-output
+          path: ./out
+      
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
