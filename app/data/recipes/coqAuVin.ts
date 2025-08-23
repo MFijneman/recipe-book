@@ -2,7 +2,7 @@ import { Recipe } from '../../types/recipe';
 
 const coqAuVin: Recipe = {
   "id": 1,
-  "title": "Julia Child's Coq Au Vin",
+  "title": "Coq Au Vin",
   "description": "A classic French chicken stew braised with wine, mushrooms, and pearl onions, inspired by Julia Child.",
   "cookTime": "120 minutes",
   "difficulty": "Medium",
