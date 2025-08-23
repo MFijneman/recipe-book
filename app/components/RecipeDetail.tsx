@@ -2,43 +2,17 @@
 
 import { useState } from 'react';
 import { Recipe } from '../types/recipe';
+import { useTranslation } from '../i18n/useTranslation';
 
 interface RecipeDetailProps {
   recipe: Recipe;
   onBack: () => void;
 }
 
-// Extended recipe data with detailed information
-interface DetailedRecipe extends Recipe {
-  ingredients: {
-    name: string;
-    amount: string;
-    unit: string;
-  }[];
-  instructions: string[];
-  prepTime: string;
-  totalTime: string;
-  servings: number;
-  nutrition: {
-    calories: number;
-    protein: number;
-    carbs: number;
-    fat: number;
-    fiber: number;
-  };
-  tips: string[];
-  tags: string[];
-}
-
 export default function RecipeDetail({ recipe, onBack }: RecipeDetailProps) {
   const [servings, setServings] = useState(4);
   const [activeTab, setActiveTab] = useState<'ingredients' | 'instructions' | 'nutrition'>('ingredients');
-
-  // Mock detailed recipe data - in a real app, this would come from an API
-  const detailedRecipe: DetailedRecipe = {
-    ...recipe,
-  
-  };
+  const { t } = useTranslation();
 
   const adjustServings = (newServings: number) => {
     setServings(Math.max(1, newServings));
@@ -69,7 +43,7 @@ export default function RecipeDetail({ recipe, onBack }: RecipeDetailProps) {
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
-            <span className="font-medium">Back to Recipes</span>
+            <span className="font-medium">{t('recipe.back.to.list')}</span>
           </button>
         </div>
       </div>
@@ -94,21 +68,21 @@ export default function RecipeDetail({ recipe, onBack }: RecipeDetailProps) {
             <div className="space-y-6">
               <div>
                 <h1 className="text-3xl font-serif font-bold text-stone-800 dark:text-stone-100 mb-3">
-                  {detailedRecipe.title}
+                  {recipe.title}
                 </h1>
                 <p className="text-stone-700 dark:text-stone-300 text-lg leading-relaxed">
-                  {detailedRecipe.description}
+                  {recipe.description}
                 </p>
-                {detailedRecipe.source && (
+                {recipe.source && (
                   <p className="mt-2 text-sm text-stone-500 dark:text-stone-400">
-                    Inspiration:{' '}
+                    {t('recipe.inspiration')}{' '}
                     <a
-                      href={detailedRecipe.source}
+                      href={recipe.source}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="underline hover:text-stone-700 dark:hover:text-stone-200"
                     >
-                      {detailedRecipe.source}
+                      {recipe.source}
                     </a>
                   </p>
                 )}
@@ -121,9 +95,9 @@ export default function RecipeDetail({ recipe, onBack }: RecipeDetailProps) {
                     <svg className="w-5 h-5 text-stone-600 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    <span className="text-sm font-medium text-stone-700 dark:text-stone-300">Prep Time</span>
+                    <span className="text-sm font-medium text-stone-700 dark:text-stone-300">{t('recipe.prep.time')}</span>
                   </div>
-                  <p className="text-lg font-semibold text-stone-800 dark:text-stone-100">{detailedRecipe.prepTime}</p>
+                  <p className="text-lg font-semibold text-stone-800 dark:text-stone-100">{recipe.prepTime} {t('unit.minutes')}</p>
                 </div>
 
                 <div className="bg-stone-100/50 dark:bg-gray-700/50 rounded-2xl p-4">
@@ -131,9 +105,9 @@ export default function RecipeDetail({ recipe, onBack }: RecipeDetailProps) {
                     <svg className="w-5 h-5 text-stone-600 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    <span className="text-sm font-medium text-stone-700 dark:text-stone-300">Total Time</span>
+                    <span className="text-sm font-medium text-stone-700 dark:text-stone-300">{t('recipe.total.time')}</span>
                   </div>
-                  <p className="text-lg font-semibold text-stone-800 dark:text-stone-100">{detailedRecipe.totalTime}</p>
+                  <p className="text-lg font-semibold text-stone-800 dark:text-stone-100">{recipe.totalTime} {t('unit.minutes')}</p>
                 </div>
 
                 <div className="bg-stone-100/50 dark:bg-gray-700/50 rounded-2xl p-4">
@@ -141,7 +115,7 @@ export default function RecipeDetail({ recipe, onBack }: RecipeDetailProps) {
                     <svg className="w-5 h-5 text-stone-600 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                     </svg>
-                    <span className="text-sm font-medium text-stone-700 dark:text-stone-300">Servings</span>
+                    <span className="text-sm font-medium text-stone-700 dark:text-stone-300">{t('recipe.servings')}</span>
                   </div>
                   <div className="flex items-center space-x-2">
                     <button
@@ -168,19 +142,19 @@ export default function RecipeDetail({ recipe, onBack }: RecipeDetailProps) {
 
                 <div className="bg-stone-100/50 dark:bg-gray-700/50 rounded-2xl p-4">
                   <div className="flex items-center space-x-2 mb-2">
-                    <span className="text-sm font-medium text-stone-700 dark:text-stone-300">Difficulty</span>
+                    <span className="text-sm font-medium text-stone-700 dark:text-stone-300">{t('recipe.difficulty')}</span>
                   </div>
-                  <span className={`px-3 py-1 text-xs font-bold rounded-full ${getDifficultyColor(detailedRecipe.difficulty)}`}>
-                    {detailedRecipe.difficulty}
+                  <span className={`px-3 py-1 text-xs font-bold rounded-full ${getDifficultyColor(recipe.difficulty)}`}>
+                    {recipe.difficulty}
                   </span>
                 </div>
               </div>
 
               {/* Tags */}
               <div className="flex flex-wrap gap-2">
-                {detailedRecipe.tags.map((tag, index) => (
+                {recipe.tags.map((tag, index) => (
                   <span key={index} className="px-3 py-1 bg-gradient-to-r from-stone-100 to-neutral-100 dark:from-gray-700 dark:to-gray-600 text-stone-800 dark:text-gray-200 text-xs font-medium rounded-full border border-stone-200 dark:border-gray-600">
-                    {tag}
+                    {t(`tag.${tag}`)}
                   </span>
                 ))}
               </div>
@@ -193,9 +167,9 @@ export default function RecipeDetail({ recipe, onBack }: RecipeDetailProps) {
           {/* Tab Navigation */}
           <div className="flex border-b border-stone-200/50 dark:border-gray-700/50">
             {[
-              { id: 'ingredients', label: 'Ingredients', icon: '🥕' },
-              { id: 'instructions', label: 'Instructions', icon: '📝' },
-              { id: 'nutrition', label: 'Nutrition', icon: '📊' }
+              { id: 'ingredients', label: t('recipe.ingredients'), icon: '🥕' },
+              { id: 'instructions', label: t('recipe.instructions'), icon: '📝' },
+              { id: 'nutrition', label: t('recipe.nutrition'), icon: '📊' }
             ].map((tab) => (
               <button
                 key={tab.id}
@@ -216,11 +190,11 @@ export default function RecipeDetail({ recipe, onBack }: RecipeDetailProps) {
           <div className="p-8">
             {activeTab === 'ingredients' && (
               <div className="space-y-4">
-                <h3 className="text-xl font-bold text-stone-800 dark:text-stone-100 mb-4">Ingredients</h3>
+                <h3 className="text-xl font-bold text-stone-800 dark:text-stone-100 mb-4">{t('recipe.ingredients')}</h3>
                 <div className="grid gap-3">
-                  {detailedRecipe.ingredients.map((ingredient, index) => {
+                  {recipe.ingredients.map((ingredient, index) => {
                     let scaledAmount = ingredient.amount;
-                    const baseServings = detailedRecipe.servings || 4;
+                    const baseServings = recipe.servings || 4;
                     // Only scale if amount is a number
                     if (!isNaN(Number(ingredient.amount)) && baseServings > 0) {
                       scaledAmount = (
@@ -243,9 +217,9 @@ export default function RecipeDetail({ recipe, onBack }: RecipeDetailProps) {
 
             {activeTab === 'instructions' && (
               <div className="space-y-6">
-                <h3 className="text-xl font-bold text-stone-800 dark:text-stone-100 mb-4">Instructions</h3>
+                <h3 className="text-xl font-bold text-stone-800 dark:text-stone-100 mb-4">{t('recipe.instructions')}</h3>
                 <div className="space-y-4">
-                  {detailedRecipe.instructions.map((instruction, index) => (
+                  {recipe.instructions.map((instruction, index) => (
                     <div key={index} className="flex space-x-4">
                       <div className="flex-shrink-0 w-8 h-8 bg-stone-600 dark:bg-gray-600 text-white rounded-full flex items-center justify-center font-bold text-sm">
                         {index + 1}
@@ -261,10 +235,10 @@ export default function RecipeDetail({ recipe, onBack }: RecipeDetailProps) {
                     <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    Pro Tips
+                    {t('recipe.tips')}
                   </h4>
                   <ul className="space-y-2">
-                    {detailedRecipe.tips.map((tip, index) => (
+                    {recipe.tips.map((tip, index) => (
                       <li key={index} className="text-amber-700 dark:text-amber-300 flex items-start space-x-2">
                         <span className="text-amber-500 dark:text-amber-400 mt-1">•</span>
                         <span>{tip}</span>
@@ -277,9 +251,9 @@ export default function RecipeDetail({ recipe, onBack }: RecipeDetailProps) {
 
             {activeTab === 'nutrition' && (
               <div className="space-y-6">
-                <h3 className="text-xl font-bold text-stone-800 dark:text-stone-100 mb-4">Nutrition Facts</h3>
+                <h3 className="text-xl font-bold text-stone-800 dark:text-stone-100 mb-4">{t('recipe.nutrition')}</h3>
                 <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-                  {Object.entries(detailedRecipe.nutrition).map(([key, value]) => (
+                  {Object.entries(recipe.nutrition).map(([key, value]) => (
                     <div key={key} className="bg-stone-100/50 dark:bg-gray-700/50 rounded-2xl p-4 text-center">
                       <p className="text-2xl font-bold text-stone-800 dark:text-stone-100">{value}</p>
                       <p className="text-sm text-stone-600 dark:text-gray-400 capitalize">{key}</p>
@@ -287,7 +261,7 @@ export default function RecipeDetail({ recipe, onBack }: RecipeDetailProps) {
                   ))}
                 </div>
                 <p className="text-sm text-stone-600 dark:text-gray-400 text-center">
-                  *Nutrition information is per serving and may vary based on ingredients used.
+                  {t('recipe.nutrition.disclaimer')}
                 </p>
               </div>
             )}

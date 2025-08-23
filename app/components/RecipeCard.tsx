@@ -1,4 +1,7 @@
+'use client';
+
 import { Recipe } from '../types/recipe';
+import { useTranslation } from '../i18n/useTranslation';
 
 interface RecipeCardProps {
   recipe: Recipe;
@@ -6,13 +9,14 @@ interface RecipeCardProps {
 }
 
 export default function RecipeCard({ recipe, onViewRecipe }: RecipeCardProps) {
+  const { t } = useTranslation();
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
-      case 'Easy':
+      case 'easy':
         return 'bg-gradient-to-r from-emerald-600 to-teal-700 text-white';
-      case 'Medium':
+      case 'medium':
         return 'bg-gradient-to-r from-amber-600 to-orange-700 text-white';
-      case 'Hard':
+      case 'hard':
         return 'bg-gradient-to-r from-red-600 to-rose-700 text-white';
       default:
         return 'bg-gradient-to-r from-stone-600 to-gray-700 text-white';
@@ -51,10 +55,10 @@ export default function RecipeCard({ recipe, onViewRecipe }: RecipeCardProps) {
             <svg className="h-4 w-4 mr-2 text-stone-600 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            {recipe.cookTime}
+            {recipe.totalTime} {t('unit.minutes')}
           </div>
           <span className={`px-3 py-1 text-xs font-bold rounded-full shadow-lg ${getDifficultyColor(recipe.difficulty)}`}>
-            {recipe.difficulty}
+            {t(`difficulity.${recipe.difficulty}`)}
           </span>
         </div>
 
@@ -62,7 +66,7 @@ export default function RecipeCard({ recipe, onViewRecipe }: RecipeCardProps) {
         <div className="flex flex-wrap gap-2 mb-6">
           {recipe.tags.map((tag, index) => (
             <span key={index} className="px-3 py-1 bg-gradient-to-r from-stone-100 to-neutral-100 dark:from-gray-700 dark:to-gray-600 text-stone-800 dark:text-gray-200 text-xs font-medium rounded-full border border-stone-200 dark:border-gray-600">
-              {tag}
+              {t(`tag.${tag}`)}
             </span>
           ))}
         </div>
@@ -72,7 +76,7 @@ export default function RecipeCard({ recipe, onViewRecipe }: RecipeCardProps) {
           onClick={() => onViewRecipe(recipe)}
           className="w-full bg-gradient-to-r from-stone-600 to-stone-700 dark:from-gray-600 dark:to-gray-700 text-white py-3 px-6 rounded-2xl font-semibold hover:from-stone-700 hover:to-stone-800 dark:hover:from-gray-700 dark:hover:to-gray-800 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
         >
-          View Recipe
+          {t('recipe.view.details')}
         </button>
       </div>
     </div>

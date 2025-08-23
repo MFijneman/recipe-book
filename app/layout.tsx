@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import I18nProvider from './components/I18nProvider';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -12,11 +13,6 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "Marks Recipe Collection - Discover Delicious Recipes",
-  description: "Browse and search through my collection of recipes",
-};
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -27,7 +23,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <I18nProvider>
+          {children}
+        </I18nProvider>
       </body>
     </html>
   );
