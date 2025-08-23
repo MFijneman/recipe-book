@@ -1,13 +1,13 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import TopHeader from './components/TopHeader';
-import Header from './components/Header';
-import SearchFilters from './components/SearchFilters';
-import RecipeGrid from './components/RecipeGrid';
-import RecipeDetail from './components/RecipeDetail';
-import { recipes } from './data/recipes';
-import { Recipe } from './types/recipe';
+import TopHeader from '@/components/TopHeader';
+import Header from '@/components/Header';
+import SearchFilters from '@/components/SearchFilters';
+import RecipeGrid from '@/components/RecipeGrid';
+import RecipeDetail from '@/components/RecipeDetail';
+import { recipes } from '@/data/recipes';
+import { Recipe } from '@/types/recipe';
 
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -46,27 +46,27 @@ export default function Home() {
   };
 
   const filteredRecipes = recipes.filter(recipe => {
-    const matchesSearch = recipe.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         recipe.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         recipe.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
-    
+    const matchesSearch =
+      recipe.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      recipe.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      recipe.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
+
     const matchesDifficulty = selectedDifficulty === 'All' || recipe.difficulty === selectedDifficulty;
-    
+
     return matchesSearch && matchesDifficulty;
   });
 
   // Show recipe detail view if a recipe is selected
   if (selectedRecipe) {
     return (
-      <div className={`min-h-screen transition-colors duration-300 ${
-        isDarkMode 
-          ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900' 
-          : 'bg-gradient-to-br from-stone-50 via-neutral-50 to-stone-100'
-      }`}>
-        <TopHeader 
-          isDarkMode={isDarkMode}
-          onToggleDarkMode={toggleDarkMode}
-        />
+      <div
+        className={`min-h-screen transition-colors duration-300 ${
+          isDarkMode
+            ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900'
+            : 'bg-gradient-to-br from-stone-50 via-neutral-50 to-stone-100'
+        }`}
+      >
+        <TopHeader isDarkMode={isDarkMode} onToggleDarkMode={toggleDarkMode} />
         <RecipeDetail recipe={selectedRecipe} onBack={handleBackToRecipes} />
       </div>
     );
@@ -74,18 +74,17 @@ export default function Home() {
 
   // Show recipe list view
   return (
-    <div className={`min-h-screen transition-colors duration-300 ${
-      isDarkMode 
-        ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900' 
-        : 'bg-gradient-to-br from-stone-50 via-neutral-50 to-stone-100'
-    }`}>
-      <TopHeader 
-        isDarkMode={isDarkMode}
-        onToggleDarkMode={toggleDarkMode}
-      />
-      
+    <div
+      className={`min-h-screen transition-colors duration-300 ${
+        isDarkMode
+          ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900'
+          : 'bg-gradient-to-br from-stone-50 via-neutral-50 to-stone-100'
+      }`}
+    >
+      <TopHeader isDarkMode={isDarkMode} onToggleDarkMode={toggleDarkMode} />
+
       <Header recipeCount={filteredRecipes.length} />
-      
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <SearchFilters
           searchTerm={searchTerm}
@@ -93,7 +92,7 @@ export default function Home() {
           selectedDifficulty={selectedDifficulty}
           setSelectedDifficulty={setSelectedDifficulty}
         />
-        
+
         <RecipeGrid recipes={filteredRecipes} onViewRecipe={handleViewRecipe} />
       </div>
     </div>

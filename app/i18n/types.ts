@@ -17,4 +17,4 @@ declare module 'react-i18next' {
 }
 
 // Export the translation keys type for use in components
-export type { TranslationKeys }; 
+export type { TranslationKeys };

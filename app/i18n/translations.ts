@@ -9,393 +9,393 @@ export const translations: Translations = {
   // Header and Navigation
   'app.title': {
     en: 'RecipeBook',
-    nl: 'Receptenboek'
+    nl: 'Receptenboek',
   },
   'header.title': {
     en: 'Discover the Best Recipes',
-    nl: 'Ontdek de Beste Recepten'
+    nl: 'Ontdek de Beste Recepten',
   },
   'header.subtitle': {
-    en: 'Discover a curated collection of tried and tested recipes that are sure to impress. Whether you\'re looking for quick weeknight dinners or elaborate weekend feasts, find inspiration and step-by-step guides to recreate delicious meals.',
-    nl: 'Ontdek een zorgvuldig samengestelde collectie van beproefde recepten die zeker zullen imponeren. Of je nu op zoek bent naar snelle weekdagmaaltijden of uitgebreide weekendfeesten, vind inspiratie en stap-voor-stap gidsen om heerlijke maaltijden te bereiden.'
+    en: "Discover a curated collection of tried and tested recipes that are sure to impress. Whether you're looking for quick weeknight dinners or elaborate weekend feasts, find inspiration and step-by-step guides to recreate delicious meals.",
+    nl: 'Ontdek een zorgvuldig samengestelde collectie van beproefde recepten die zeker zullen imponeren. Of je nu op zoek bent naar snelle weekdagmaaltijden of uitgebreide weekendfeesten, vind inspiratie en stap-voor-stap gidsen om heerlijke maaltijden te bereiden.',
   },
   'recipes.found': {
     en: 'recipe found',
-    nl: 'recept gevonden'
+    nl: 'recept gevonden',
   },
   'recipes.found.plural': {
     en: 'recipes found',
-    nl: 'recepten gevonden'
+    nl: 'recepten gevonden',
   },
 
   // Search and Filters
   'search.placeholder': {
     en: 'Search recipes...',
-    nl: 'Zoek recepten...'
+    nl: 'Zoek recepten...',
   },
   'search.button': {
     en: 'Search',
-    nl: 'Zoeken'
+    nl: 'Zoeken',
   },
   'filter.all.difficulties': {
     en: 'All Difficulties',
-    nl: 'Alle Moeilijkheidsgraden'
+    nl: 'Alle Moeilijkheidsgraden',
   },
   'filter.easy': {
     en: 'Easy',
-    nl: 'Makkelijk'
+    nl: 'Makkelijk',
   },
   'filter.medium': {
     en: 'Medium',
-    nl: 'Gemiddeld'
+    nl: 'Gemiddeld',
   },
   'filter.hard': {
     en: 'Hard',
-    nl: 'Moeilijk'
+    nl: 'Moeilijk',
   },
   // Recipe Cards
   'recipe.cook.time': {
     en: 'Cook Time',
-    nl: 'Kooktijd'
+    nl: 'Kooktijd',
   },
   'recipe.prep.time': {
     en: 'Prep Time',
-    nl: 'Voorbereidingstijd'
+    nl: 'Voorbereidingstijd',
   },
   'recipe.total.time': {
     en: 'Total Time',
-    nl: 'Totale Tijd'
+    nl: 'Totale Tijd',
   },
   'recipe.difficulty': {
     en: 'Difficulty',
-    nl: 'Moeilijkheidsgraad'
+    nl: 'Moeilijkheidsgraad',
   },
   'difficulity.easy': {
     en: 'Easy',
-    nl: 'Makkelijk'
+    nl: 'Makkelijk',
   },
   'difficulity.medium': {
     en: 'Medium',
-    nl: 'Gemiddeld'
+    nl: 'Gemiddeld',
   },
   'difficulity.hard': {
     en: 'Hard',
-    nl: 'Moeilijk'
+    nl: 'Moeilijk',
   },
   'recipe.servings': {
     en: 'Servings',
-    nl: 'Porties'
+    nl: 'Porties',
   },
   'recipe.view.details': {
     en: 'View Recipe',
-    nl: 'Bekijk Recept'
+    nl: 'Bekijk Recept',
   },
 
   // Recipe Detail
   'recipe.back.to.list': {
     en: 'Back to Recipes',
-    nl: 'Terug naar Recepten'
+    nl: 'Terug naar Recepten',
   },
   'recipe.ingredients': {
     en: 'Ingredients',
-    nl: 'Ingrediënten'
+    nl: 'Ingrediënten',
   },
   'recipe.instructions': {
     en: 'Instructions',
-    nl: 'Bereidingswijze'
+    nl: 'Bereidingswijze',
   },
   'recipe.nutrition': {
     en: 'Nutrition',
-    nl: 'Voedingswaarden'
+    nl: 'Voedingswaarden',
   },
   'recipe.tips': {
     en: 'Tips',
-    nl: 'Tips'
+    nl: 'Tips',
   },
   'recipe.source': {
     en: 'Source',
-    nl: 'Bron'
+    nl: 'Bron',
   },
   'recipe.calories': {
     en: 'Calories',
-    nl: 'Calorieën'
+    nl: 'Calorieën',
   },
   'recipe.protein': {
     en: 'Protein',
-    nl: 'Eiwit'
+    nl: 'Eiwit',
   },
   'recipe.carbs': {
     en: 'Carbs',
-    nl: 'Koolhydraten'
+    nl: 'Koolhydraten',
   },
   'recipe.fat': {
     en: 'Fat',
-    nl: 'Vet'
+    nl: 'Vet',
   },
   'recipe.fiber': {
     en: 'Fiber',
-    nl: 'Vezels'
+    nl: 'Vezels',
   },
   'recipe.nutrition.disclaimer': {
     en: '*Nutrition information is per serving and may vary based on ingredients used.',
-    nl: '*Voedingsinformatie is per portie en kan variëren afhankelijk van de gebruikte ingrediënten.'
+    nl: '*Voedingsinformatie is per portie en kan variëren afhankelijk van de gebruikte ingrediënten.',
   },
   'recipe.inspiration': {
     en: 'Inspiration:',
-    nl: 'Inspiratie:'
+    nl: 'Inspiratie:',
   },
 
   // Common units
   'unit.minutes': {
     en: 'minutes',
-    nl: 'minuten'
+    nl: 'minuten',
   },
   'unit.g': {
     en: 'g',
-    nl: 'g'
+    nl: 'g',
   },
   'unit.kg': {
     en: 'kg',
-    nl: 'kg'
+    nl: 'kg',
   },
   'unit.ml': {
     en: 'ml',
-    nl: 'ml'
+    nl: 'ml',
   },
   'unit.l': {
     en: 'l',
-    nl: 'l'
+    nl: 'l',
   },
   'unit.tbsp': {
     en: 'tbsp',
-    nl: 'eetl'
+    nl: 'eetl',
   },
   'unit.tsp': {
     en: 'tsp',
-    nl: 'theel'
+    nl: 'theel',
   },
   'unit.cup': {
     en: 'cup',
-    nl: 'kop'
+    nl: 'kop',
   },
   'unit.piece': {
     en: '',
-    nl: ''
+    nl: '',
   },
   'unit.pieces': {
     en: '',
-    nl: ''
+    nl: '',
   },
   'unit.to.serve': {
     en: 'to serve',
-    nl: 'om te serveren'
+    nl: 'om te serveren',
   },
   'unit.dash': {
     en: 'dash',
-    nl: 'scheutje'
+    nl: 'scheutje',
   },
 
   // Recipe tags
   'tag.breakfast': {
     en: 'breakfast',
-    nl: 'ontbijt'
+    nl: 'ontbijt',
   },
   'tag.lunch': {
     en: 'lunch',
-    nl: 'lunch'
+    nl: 'lunch',
   },
   'tag.dinner': {
     en: 'dinner',
-    nl: 'diner'
+    nl: 'diner',
   },
   'tag.dessert': {
     en: 'dessert',
-    nl: 'dessert'
+    nl: 'dessert',
   },
   'tag.snack': {
     en: 'snack',
-    nl: 'tussendoortje'
+    nl: 'tussendoortje',
   },
-  
+
   // Cuisines
   'tag.greek': {
     en: 'Greek',
-    nl: 'Grieks'
+    nl: 'Grieks',
   },
   'tag.french': {
     en: 'French',
-    nl: 'Frans'
+    nl: 'Frans',
   },
   'tag.italian': {
     en: 'Italian',
-    nl: 'Italiaans'
+    nl: 'Italiaans',
   },
   'tag.mediterranean': {
     en: 'Mediterranean',
-    nl: 'Mediterraans'
+    nl: 'Mediterraans',
   },
   'tag.asian': {
     en: 'Asian',
-    nl: 'Aziatisch'
+    nl: 'Aziatisch',
   },
   'tag.mexican': {
     en: 'Mexican',
-    nl: 'Mexicaans'
+    nl: 'Mexicaans',
   },
   'tag.indian': {
     en: 'Indian',
-    nl: 'Indiaas'
+    nl: 'Indiaas',
   },
   'tag.american': {
     en: 'American',
-    nl: 'Amerikaans'
+    nl: 'Amerikaans',
   },
-  
+
   // Ingredients
   'tag.beef': {
     en: 'beef',
-    nl: 'rundvlees'
+    nl: 'rundvlees',
   },
   'tag.chicken': {
     en: 'chicken',
-    nl: 'kip'
+    nl: 'kip',
   },
   'tag.pasta': {
     en: 'pasta',
-    nl: 'pasta'
+    nl: 'pasta',
   },
   'tag.vegetarian': {
     en: 'vegetarian',
-    nl: 'vegetarisch'
+    nl: 'vegetarisch',
   },
   'tag.vegan': {
     en: 'vegan',
-    nl: 'veganistisch'
+    nl: 'veganistisch',
   },
   'tag.fish': {
     en: 'fish',
-    nl: 'vis'
+    nl: 'vis',
   },
   'tag.pork': {
     en: 'pork',
-    nl: 'varkensvlees'
+    nl: 'varkensvlees',
   },
   'tag.lamb': {
     en: 'lamb',
-    nl: 'lamsvlees'
+    nl: 'lamsvlees',
   },
   'tag.seafood': {
     en: 'seafood',
-    nl: 'zeevruchten'
+    nl: 'zeevruchten',
   },
-  
+
   // Cooking Methods
   'tag.stew': {
     en: 'stew',
-    nl: 'stoofpot'
+    nl: 'stoofpot',
   },
   'tag.stuffed': {
     en: 'stuffed',
-    nl: 'gevuld'
+    nl: 'gevuld',
   },
   'tag.traybake': {
     en: 'traybake',
-    nl: 'ovenschotel'
+    nl: 'ovenschotel',
   },
   'tag.one-pan': {
     en: 'one-pan',
-    nl: 'één-pan'
+    nl: 'één-pan',
   },
   'tag.homemade': {
     en: 'homemade',
-    nl: 'zelfgemaakt'
+    nl: 'zelfgemaakt',
   },
   'tag.grilled': {
     en: 'grilled',
-    nl: 'gegrild'
+    nl: 'gegrild',
   },
   'tag.baked': {
     en: 'baked',
-    nl: 'gebakken'
+    nl: 'gebakken',
   },
   'tag.fried': {
     en: 'fried',
-    nl: 'gebakken'
+    nl: 'gebakken',
   },
   'tag.roasted': {
     en: 'roasted',
-    nl: 'geroosterd'
+    nl: 'geroosterd',
   },
-  
+
   // Attributes
   'tag.quick': {
     en: 'quick',
-    nl: 'snel'
+    nl: 'snel',
   },
   'tag.easy': {
     en: 'easy',
-    nl: 'makkelijk'
+    nl: 'makkelijk',
   },
   'tag.healthy': {
     en: 'healthy',
-    nl: 'gezond'
+    nl: 'gezond',
   },
   'tag.comfort-food': {
     en: 'comfort food',
-    nl: 'comfort food'
+    nl: 'comfort food',
   },
   'tag.gluten-free': {
     en: 'gluten-free',
-    nl: 'glutenvrij'
+    nl: 'glutenvrij',
   },
   'tag.dairy-free': {
     en: 'dairy-free',
-    nl: 'lactosevrij'
+    nl: 'lactosevrij',
   },
   'tag.spicy': {
     en: 'spicy',
-    nl: 'pikant'
+    nl: 'pikant',
   },
   'tag.sweet': {
     en: 'sweet',
-    nl: 'zoet'
+    nl: 'zoet',
   },
   'tag.savory': {
     en: 'savory',
-    nl: 'hartig'
+    nl: 'hartig',
   },
 
   // Tag Categories
   'category.mealTypes': {
     en: 'Meal Types',
-    nl: 'Maaltijdtypes'
+    nl: 'Maaltijdtypes',
   },
   'category.cuisines': {
     en: 'Cuisines',
-    nl: 'Keukens'
+    nl: 'Keukens',
   },
   'category.ingredients': {
     en: 'Ingredients',
-    nl: 'Ingrediënten'
+    nl: 'Ingrediënten',
   },
   'category.cookingMethods': {
     en: 'Cooking Methods',
-    nl: 'Bereidingsmethoden'
+    nl: 'Bereidingsmethoden',
   },
   'category.attributes': {
     en: 'Attributes',
-    nl: 'Eigenschappen'
+    nl: 'Eigenschappen',
   },
 
   // Language names
   'language.english': {
     en: 'English',
-    nl: 'Engels'
+    nl: 'Engels',
   },
   'language.dutch': {
     en: 'Dutch',
-    nl: 'Nederlands'
-  }
+    nl: 'Nederlands',
+  },
 };
 
 export function getTranslation(key: string, language: string): string {
@@ -412,4 +412,4 @@ export function getPluralTranslation(key: string, count: number, language: strin
     return getTranslation(key, language);
   }
   return getTranslation(`${key}.plural`, language);
-} 
+}

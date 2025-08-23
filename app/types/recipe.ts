@@ -1,8 +1,26 @@
 export type MealType = 'breakfast' | 'lunch' | 'dinner' | 'dessert' | 'snack';
 export type Cuisine = 'greek' | 'french' | 'italian' | 'mediterranean' | 'asian' | 'mexican' | 'indian' | 'american';
 export type Ingredient = 'beef' | 'chicken' | 'pasta' | 'vegetarian' | 'vegan' | 'fish' | 'pork' | 'lamb' | 'seafood';
-export type CookingMethod = 'stew' | 'stuffed' | 'traybake' | 'one-pan' | 'homemade' | 'grilled' | 'baked' | 'fried' | 'roasted';
-export type Attribute = 'quick' | 'easy' | 'healthy' | 'comfort-food' | 'gluten-free' | 'dairy-free' | 'spicy' | 'sweet' | 'savory';
+export type CookingMethod =
+  | 'stew'
+  | 'stuffed'
+  | 'traybake'
+  | 'one-pan'
+  | 'homemade'
+  | 'grilled'
+  | 'baked'
+  | 'fried'
+  | 'roasted';
+export type Attribute =
+  | 'quick'
+  | 'easy'
+  | 'healthy'
+  | 'comfort-food'
+  | 'gluten-free'
+  | 'dairy-free'
+  | 'spicy'
+  | 'sweet'
+  | 'savory';
 
 export type RecipeTag = MealType | Cuisine | Ingredient | CookingMethod | Attribute;
 

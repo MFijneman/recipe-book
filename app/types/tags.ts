@@ -4,8 +4,28 @@ export const TAG_CATEGORIES = {
   mealTypes: ['breakfast', 'lunch', 'dinner', 'dessert', 'snack'] as MealType[],
   cuisines: ['greek', 'french', 'italian', 'mediterranean', 'asian', 'mexican', 'indian', 'american'] as Cuisine[],
   ingredients: ['beef', 'chicken', 'pasta', 'vegetarian', 'vegan', 'fish', 'pork', 'lamb', 'seafood'] as Ingredient[],
-  cookingMethods: ['stew', 'stuffed', 'traybake', 'one-pan', 'homemade', 'grilled', 'baked', 'fried', 'roasted'] as CookingMethod[],
-  attributes: ['quick', 'easy', 'healthy', 'comfort-food', 'gluten-free', 'dairy-free', 'spicy', 'sweet', 'savory'] as Attribute[]
+  cookingMethods: [
+    'stew',
+    'stuffed',
+    'traybake',
+    'one-pan',
+    'homemade',
+    'grilled',
+    'baked',
+    'fried',
+    'roasted',
+  ] as CookingMethod[],
+  attributes: [
+    'quick',
+    'easy',
+    'healthy',
+    'comfort-food',
+    'gluten-free',
+    'dairy-free',
+    'spicy',
+    'sweet',
+    'savory',
+  ] as Attribute[],
 } as const;
 
 export function getTagCategory(tag: RecipeTag): keyof typeof TAG_CATEGORIES {
@@ -23,10 +43,10 @@ export function getAllTags(): RecipeTag[] {
     ...TAG_CATEGORIES.cuisines,
     ...TAG_CATEGORIES.ingredients,
     ...TAG_CATEGORIES.cookingMethods,
-    ...TAG_CATEGORIES.attributes
+    ...TAG_CATEGORIES.attributes,
   ];
 }
 
 export function getTagsByCategory(category: keyof typeof TAG_CATEGORIES): RecipeTag[] {
   return TAG_CATEGORIES[category];
-} 
+}

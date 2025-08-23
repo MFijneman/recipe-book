@@ -13,4 +13,4 @@ export function useTranslation() {
     changeLanguage,
     isReady: i18n.isInitialized,
   };
-} 
+}

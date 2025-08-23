@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslation } from '../i18n/useTranslation';
+import { useTranslation } from '@/i18n/useTranslation';
 
 interface HeaderProps {
   recipeCount: number;
@@ -29,4 +29,4 @@ export default function Header({ recipeCount }: HeaderProps) {
       </div>
     </header>
   );
-} 
+}
