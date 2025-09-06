@@ -5,15 +5,12 @@ import TopHeader from '@/components/TopHeader';
 import Header from '@/components/Header';
 import SearchFilters from '@/components/SearchFilters';
 import RecipeGrid from '@/components/RecipeGrid';
-import RecipeDetail from '@/components/RecipeDetail';
 import { recipes } from '@/data/recipes';
-import { Recipe } from '@/types/recipe';
 
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedDifficulty, setSelectedDifficulty] = useState('All');
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
 
   // Load dark mode preference from localStorage
   useEffect(() => {
@@ -37,14 +34,6 @@ export default function Home() {
     setIsDarkMode(!isDarkMode);
   };
 
-  const handleViewRecipe = (recipe: Recipe) => {
-    setSelectedRecipe(recipe);
-  };
-
-  const handleBackToRecipes = () => {
-    setSelectedRecipe(null);
-  };
-
   const filteredRecipes = recipes.filter(recipe => {
     const matchesSearch =
       recipe.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -55,22 +44,6 @@ export default function Home() {
 
     return matchesSearch && matchesDifficulty;
   });
-
-  // Show recipe detail view if a recipe is selected
-  if (selectedRecipe) {
-    return (
-      <div
-        className={`min-h-screen transition-colors duration-300 ${
-          isDarkMode
-            ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900'
-            : 'bg-gradient-to-br from-stone-50 via-neutral-50 to-stone-100'
-        }`}
-      >
-        <TopHeader isDarkMode={isDarkMode} onToggleDarkMode={toggleDarkMode} />
-        <RecipeDetail recipe={selectedRecipe} onBack={handleBackToRecipes} />
-      </div>
-    );
-  }
 
   // Show recipe list view
   return (
@@ -93,7 +66,7 @@ export default function Home() {
           setSelectedDifficulty={setSelectedDifficulty}
         />
 
-        <RecipeGrid recipes={filteredRecipes} onViewRecipe={handleViewRecipe} />
+        <RecipeGrid recipes={filteredRecipes} />
       </div>
     </div>
   );

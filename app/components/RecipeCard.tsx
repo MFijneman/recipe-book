@@ -1,14 +1,15 @@
 'use client';
 
+import Link from 'next/link';
 import { Recipe } from '@/types/recipe';
 import { useTranslation } from '@/i18n/useTranslation';
+import { createRecipeSlug } from '@/utils/slug';
 
 interface RecipeCardProps {
   recipe: Recipe;
-  onViewRecipe: (recipe: Recipe) => void;
 }
 
-export default function RecipeCard({ recipe, onViewRecipe }: RecipeCardProps) {
+export default function RecipeCard({ recipe }: RecipeCardProps) {
   const { t } = useTranslation();
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
@@ -97,12 +98,12 @@ export default function RecipeCard({ recipe, onViewRecipe }: RecipeCardProps) {
         </div>
 
         {/* View Recipe Button */}
-        <button
-          onClick={() => onViewRecipe(recipe)}
-          className="w-full bg-gradient-to-r from-stone-600 to-stone-700 dark:from-gray-600 dark:to-gray-700 text-white py-3 px-6 rounded-2xl font-semibold hover:from-stone-700 hover:to-stone-800 dark:hover:from-gray-700 dark:hover:to-gray-800 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
+        <Link
+          href={`/recipes/${createRecipeSlug(recipe)}`}
+          className="block w-full bg-gradient-to-r from-stone-600 to-stone-700 dark:from-gray-600 dark:to-gray-700 text-white py-3 px-6 rounded-2xl font-semibold hover:from-stone-700 hover:to-stone-800 dark:hover:from-gray-700 dark:hover:to-gray-800 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl text-center"
         >
           {t('recipe.view.details')}
-        </button>
+        </Link>
       </div>
     </div>
   );
