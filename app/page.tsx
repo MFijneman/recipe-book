@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import TopHeader from '@/components/TopHeader';
+import { useState } from 'react';
+import BasicLayout from '@/components/BasicLayout';
 import Header from '@/components/Header';
 import SearchFilters from '@/components/SearchFilters';
 import RecipeGrid from '@/components/RecipeGrid';
@@ -10,29 +10,6 @@ import { recipes } from '@/data/recipes';
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedDifficulty, setSelectedDifficulty] = useState('All');
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Load dark mode preference from localStorage
-  useEffect(() => {
-    const savedDarkMode = localStorage.getItem('darkMode');
-    if (savedDarkMode) {
-      setIsDarkMode(JSON.parse(savedDarkMode));
-    }
-  }, []);
-
-  // Save dark mode preference to localStorage
-  useEffect(() => {
-    localStorage.setItem('darkMode', JSON.stringify(isDarkMode));
-    if (isDarkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [isDarkMode]);
-
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-  };
 
   const filteredRecipes = recipes.filter(recipe => {
     const matchesSearch =
@@ -47,15 +24,7 @@ export default function Home() {
 
   // Show recipe list view
   return (
-    <div
-      className={`min-h-screen transition-colors duration-300 ${
-        isDarkMode
-          ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900'
-          : 'bg-gradient-to-br from-stone-50 via-neutral-50 to-stone-100'
-      }`}
-    >
-      <TopHeader isDarkMode={isDarkMode} onToggleDarkMode={toggleDarkMode} />
-
+    <BasicLayout>
       <Header recipeCount={filteredRecipes.length} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -68,6 +37,6 @@ export default function Home() {
 
         <RecipeGrid recipes={filteredRecipes} />
       </div>
-    </div>
+    </BasicLayout>
   );
 }
