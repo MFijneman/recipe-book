@@ -10,7 +10,7 @@ interface RecipeDetailProps {
 }
 
 export default function RecipeDetail({ recipe, onBack }: RecipeDetailProps) {
-  const [servings, setServings] = useState(4);
+  const [servings, setServings] = useState(recipe.servings);
   const [activeTab, setActiveTab] = useState<'ingredients' | 'instructions' | 'nutrition'>('ingredients');
   const { t } = useTranslation();
 

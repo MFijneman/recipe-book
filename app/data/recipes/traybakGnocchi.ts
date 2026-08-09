@@ -62,8 +62,9 @@ const traybakeGnocchi: Recipe = {
   instructions: [
     'Preheat the oven to 200°C.',
     'Line a baking sheet with baking paper.',
-    'Cut the onions, bell peppers, cherry tomatoes, and zucchinis into bite-sized pieces.',
-    'Spread the gnocchi, onion, bell peppers, and zucchini on the baking sheet. Drizzle with olive oil and add the pesto. Mix everything together with a spoon or your hands until evenly coated.',
+    'Cut the onions, bell peppers, and zucchinis into bite-sized pieces and halve the cherry tomatoes.',
+    'Spread the gnocchi, onions, bell peppers, zucchinis, and cherry tomatoes on the baking sheet.',
+    'Drizzle with the olive oil, add the pesto, and mix with a spoon or your hands until everything is evenly coated.',
     'Place the feta cheese in the center of the tray.',
     'Bake in the oven for 20-25 minutes until the vegetables are tender and the gnocchi is golden.',
     'Serve immediately with fresh arugula on top.',
@@ -76,7 +77,7 @@ const traybakeGnocchi: Recipe = {
     fat: 0,
     fiber: 0,
   },
-  tips: [''],
+  tips: ['Stir everything halfway through baking so the gnocchi browns evenly.'],
 };
 
 export default traybakeGnocchi;
