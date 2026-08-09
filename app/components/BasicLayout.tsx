@@ -1,14 +1,15 @@
 import TopHeader from '@/components/TopHeader';
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, ReactNode } from 'react';
 
 interface BasicLayoutProps extends PropsWithChildren {
   showTopHeader?: boolean;
+  topHeaderActions?: ReactNode;
 }
 
-export default function BasicLayout({ children, showTopHeader = true }: BasicLayoutProps) {
+export default function BasicLayout({ children, showTopHeader = true, topHeaderActions }: BasicLayoutProps) {
   return (
-    <div className="min-h-screen transition-colors duration-300 bg-gradient-to-br from-stone-50 via-neutral-50 to-stone-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
-      {showTopHeader && <TopHeader />}
+    <div className="min-h-screen bg-cream text-ink">
+      {showTopHeader && <TopHeader actions={topHeaderActions} />}
       {children}
     </div>
   );

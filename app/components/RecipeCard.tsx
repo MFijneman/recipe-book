@@ -7,104 +7,101 @@ import { createRecipeSlug } from '@/utils/slug';
 
 interface RecipeCardProps {
   recipe: Recipe;
+  index: number;
 }
 
-export default function RecipeCard({ recipe }: RecipeCardProps) {
+const tints = [
+  { bg: 'bg-accent-200', blob: 'bg-accent-300', icon: 'text-accent-800' },
+  { bg: 'bg-sage-200', blob: 'bg-sage-300', icon: 'text-sage-800' },
+  { bg: 'bg-sand-200', blob: 'bg-sand-300', icon: 'text-sand-800' },
+];
+
+const blobShapes = [
+  '46% 54% 58% 42% / 52% 48% 52% 48%',
+  '58% 42% 46% 54% / 48% 56% 44% 52%',
+  '50% 50% 42% 58% / 56% 46% 54% 44%',
+];
+
+const difficultyTags = {
+  easy: 'bg-sage-100 text-sage-800',
+  medium: 'bg-accent-100 text-accent-800',
+  hard: 'bg-sand-100 text-sand-800',
+};
+
+export default function RecipeCard({ recipe, index }: RecipeCardProps) {
   const { t } = useTranslation();
-  const getDifficultyColor = (difficulty: string) => {
-    switch (difficulty) {
-      case 'easy':
-        return 'bg-gradient-to-r from-emerald-600 to-teal-700 text-white';
-      case 'medium':
-        return 'bg-gradient-to-r from-amber-600 to-orange-700 text-white';
-      case 'hard':
-        return 'bg-gradient-to-r from-red-600 to-rose-700 text-white';
-      default:
-        return 'bg-gradient-to-r from-stone-600 to-slate-700 text-white';
-    }
-  };
+  const tint = tints[index % tints.length];
+  const blobShape = blobShapes[index % blobShapes.length];
 
   return (
-    <div className="group bg-stone-50/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-3xl border border-stone-200/50 dark:border-slate-700/50 overflow-hidden hover:shadow-xl hover:scale-[1.02] transition-all duration-300">
+    <Link
+      href={`/recipes/${createRecipeSlug(recipe)}`}
+      className="flex flex-col overflow-hidden rounded-[32px] bg-surface shadow-soft transition-[box-shadow,transform] duration-250 hover:-translate-y-[3px] hover:shadow-lift"
+    >
       {/* Recipe Image Placeholder */}
-      <div className="h-56 bg-gradient-to-br from-stone-100 via-neutral-100 to-stone-200 dark:from-slate-700 dark:via-slate-600 dark:to-slate-700 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-t from-stone-200/30 dark:from-slate-600/30 to-transparent"></div>
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-center">
-            <div className="bg-white/30 dark:bg-slate-600/30 backdrop-blur-sm rounded-2xl p-4 mb-3">
-              <svg
-                className="mx-auto h-8 w-8 text-stone-700 dark:text-slate-300"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                />
-              </svg>
-            </div>
-            <p className="text-sm font-medium text-stone-800 dark:text-slate-200">Recipe Image</p>
-          </div>
+      <div className={`flex h-[148px] items-center justify-center ${tint.bg}`}>
+        <div
+          className={`flex h-[86px] w-[86px] items-center justify-center ${tint.blob}`}
+          style={{ borderRadius: blobShape }}
+        >
+          <svg
+            className={tint.icon}
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.75"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M2 12h20" />
+            <path d="M20 12v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8" />
+            <path d="m4 8 16-4" />
+            <path d="m8.86 6.78-.45-1.81a2 2 0 0 1 1.45-2.43l1.94-.48a2 2 0 0 1 2.43 1.46l.45 1.8" />
+          </svg>
         </div>
       </div>
 
       {/* Recipe Content */}
-      <div className="p-6">
-        <h3 className="text-xl font-serif font-bold text-stone-800 dark:text-stone-100 mb-3 group-hover:text-stone-700 dark:group-hover:text-stone-200 transition-colors duration-300">
-          {recipe.title}
-        </h3>
-        <p className="text-stone-700 dark:text-stone-300 text-sm mb-4 leading-relaxed line-clamp-2">
-          {recipe.description}
-        </p>
+      <div className="flex flex-1 flex-col gap-2 p-4">
+        <h3 className="font-heading text-[21px] leading-[1.15]">{recipe.title}</h3>
+        <p className="flex-1 text-[13.5px] leading-normal text-ink/70">{recipe.description}</p>
 
         {/* Recipe Meta */}
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center text-sm text-stone-700 dark:text-stone-300 bg-stone-100/50 dark:bg-slate-700/50 rounded-full px-3 py-1">
+        <div className="mt-1 flex flex-wrap items-center gap-2">
+          <span className="inline-flex items-center gap-1.5 text-[12.5px] font-semibold text-accent-700">
             <svg
-              className="h-4 w-4 mr-2 text-stone-600 dark:text-slate-400"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              viewBox="0 0 24 24"
+              strokeWidth="2.75"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
+              <circle cx="12" cy="12" r="10" />
+              <polyline points="12 6 12 12 16 14" />
             </svg>
-            {recipe.totalTime} {t('unit.minutes')}
-          </div>
+            {recipe.totalTime} {t('unit.min')}
+          </span>
           <span
-            className={`px-3 py-1 text-xs font-bold rounded-full shadow-lg ${getDifficultyColor(recipe.difficulty)}`}
+            className={`ml-auto rounded-full px-2.5 py-[3px] text-[11px] tracking-wide ${difficultyTags[recipe.difficulty]}`}
           >
             {t(`difficulity.${recipe.difficulty}`)}
           </span>
         </div>
 
         {/* Tags */}
-        <div className="flex flex-wrap gap-2 mb-6">
-          {recipe.tags.map((tag, index) => (
-            <span
-              key={index}
-              className="px-3 py-1 bg-gradient-to-r from-stone-100 to-neutral-100 dark:from-slate-700 dark:to-slate-600 text-stone-800 dark:text-slate-200 text-xs font-medium rounded-full border border-stone-200 dark:border-slate-600"
-            >
+        <div className="flex flex-wrap gap-1.5">
+          {recipe.tags.slice(0, 3).map((tag, i) => (
+            <span key={i} className="rounded-full bg-sand-100 px-2.5 py-[3px] text-[11px] tracking-wide text-sand-800">
               {t(`tag.${tag}`)}
             </span>
           ))}
         </div>
-
-        {/* View Recipe Button */}
-        <Link
-          href={`/recipes/${createRecipeSlug(recipe)}`}
-          className="block w-full bg-gradient-to-r from-stone-600 to-stone-700 dark:from-slate-600 dark:to-slate-700 text-white py-3 px-6 rounded-2xl font-semibold hover:from-stone-700 hover:to-stone-800 dark:hover:from-slate-700 dark:hover:to-slate-800 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl text-center"
-        >
-          {t('recipe.view.details')}
-        </Link>
       </div>
-    </div>
+    </Link>
   );
 }

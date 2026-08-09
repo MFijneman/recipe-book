@@ -41,6 +41,10 @@ export const translations: Translations = {
     en: 'All Difficulties',
     nl: 'Alle Moeilijkheidsgraden',
   },
+  'filter.all': {
+    en: 'All',
+    nl: 'Alle',
+  },
   'filter.easy': {
     en: 'Easy',
     nl: 'Makkelijk',
@@ -65,6 +69,14 @@ export const translations: Translations = {
   'recipe.total.time': {
     en: 'Total Time',
     nl: 'Totale Tijd',
+  },
+  'recipe.prep': {
+    en: 'Prep',
+    nl: 'Voorbereiding',
+  },
+  'recipe.total': {
+    en: 'Total',
+    nl: 'Totaal',
   },
   'recipe.difficulty': {
     en: 'Difficulty',
@@ -149,6 +161,10 @@ export const translations: Translations = {
   'unit.minutes': {
     en: 'minutes',
     nl: 'minuten',
+  },
+  'unit.min': {
+    en: 'min',
+    nl: 'min',
   },
   'unit.g': {
     en: 'g',

@@ -17,7 +17,7 @@ export default function Home() {
       recipe.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
       recipe.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
 
-    const matchesDifficulty = selectedDifficulty === 'All' || recipe.difficulty === selectedDifficulty;
+    const matchesDifficulty = selectedDifficulty === 'All' || recipe.difficulty === selectedDifficulty.toLowerCase();
 
     return matchesSearch && matchesDifficulty;
   });
@@ -27,7 +27,7 @@ export default function Home() {
     <BasicLayout>
       <Header recipeCount={filteredRecipes.length} />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="mx-auto max-w-[1160px] px-4 pb-9">
         <SearchFilters
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}

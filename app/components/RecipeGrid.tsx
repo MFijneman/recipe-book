@@ -8,34 +8,36 @@ interface RecipeGridProps {
 export default function RecipeGrid({ recipes }: RecipeGridProps) {
   if (recipes.length === 0) {
     return (
-      <div className="text-center py-16">
-        <div className="bg-stone-50/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-3xl p-12 border border-stone-200/50 dark:border-slate-700/50 shadow-xl">
-          <div className="bg-gradient-to-br from-stone-100 to-neutral-100 dark:from-gray-700 dark:to-gray-600 rounded-full w-20 h-20 mx-auto mb-6 flex items-center justify-center">
-            <svg
-              className="h-10 w-10 text-stone-700 dark:text-slate-300"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6-4h6m2 5.291A7.962 7.962 0 0112 15c-2.34 0-4.47-.881-6.08-2.33"
-              />
-            </svg>
-          </div>
-          <h3 className="text-xl font-serif font-bold text-stone-800 dark:text-stone-100 mb-2">No recipes found</h3>
-          <p className="text-stone-700 dark:text-stone-300">Try adjusting your search terms or filters.</p>
+      <div className="flex flex-col items-center gap-3 px-4 py-9 text-center">
+        <div
+          className="flex h-[92px] w-[92px] items-center justify-center bg-sage-200"
+          style={{ borderRadius: '46% 54% 58% 42% / 52% 48% 52% 48%' }}
+        >
+          <svg
+            className="text-sage-700"
+            width="34"
+            height="34"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.75"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <circle cx="11" cy="11" r="8" />
+            <path d="m21 21-4.3-4.3" />
+          </svg>
         </div>
+        <h3 className="font-heading text-[26px]">No recipes found</h3>
+        <p className="text-[15px] text-ink/70">Try adjusting your search terms or filters.</p>
       </div>
     );
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-      {recipes.map(recipe => (
-        <RecipeCard key={recipe.id} recipe={recipe} />
+    <div className="grid grid-cols-[repeat(auto-fill,minmax(258px,1fr))] gap-[18px]">
+      {recipes.map((recipe, index) => (
+        <RecipeCard key={recipe.id} recipe={recipe} index={index} />
       ))}
     </div>
   );
