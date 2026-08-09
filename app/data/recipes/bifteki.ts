@@ -72,8 +72,8 @@ const bifteki: Recipe = {
   instructions: [
     'Peel and finely chop the garlic cloves, onion, and fresh mint.',
     'In a bowl, mix the ground beef with the chopped garlic, onion, mint, egg, cumin, oregano, salt, and pepper.',
-    'Add breadcrumbs to the mixture as needed to make it drier and easier to shape.',
-    'Divide the minced meat into 8 equal portions.',
+    'Add the breadcrumbs to the mixture as needed to make it drier and easier to shape.',
+    'Divide the meat mixture into 8 equal portions.',
     'Cut the feta cheese into small cubes, approximately 2.5 x 1 cm.',
     'Place a cube of feta on top of each portion of mince and fold the meat around it to form an elongated burger.',
     'Grill the bifteki for about 10 minutes until golden brown and cooked through.',
