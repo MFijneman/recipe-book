@@ -9,7 +9,7 @@ export const translations: Translations = {
   // Header and Navigation
   'app.title': {
     en: 'RecipeBook',
-    nl: 'Receptenboek',
+    nl: 'RecipeBook',
   },
   'header.title': {
     en: 'Discover the Best Recipes',

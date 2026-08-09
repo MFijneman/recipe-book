@@ -34,7 +34,7 @@ export default function RecipeDetail({ recipe, onBack }: RecipeDetailProps) {
   return (
     <div className="min-h-screen bg-gradient-to-br from-stone-50 via-neutral-50 to-stone-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       {/* Back Button */}
-      <div className="sticky top-0 z-40 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-b border-stone-200/50 dark:border-gray-700/50">
+      <div className="sticky top-0 z-40 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm border-b border-stone-200/50 dark:border-slate-700/50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <button
             onClick={onBack}
@@ -50,14 +50,14 @@ export default function RecipeDetail({ recipe, onBack }: RecipeDetailProps) {
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Recipe Header */}
-        <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-3xl border border-stone-200/50 dark:border-gray-700/50 p-8 mb-8">
+        <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-3xl border border-stone-200/50 dark:border-slate-700/50 p-8 mb-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Recipe Image */}
             <div className="h-80 bg-gradient-to-br from-stone-100 via-neutral-100 to-stone-200 dark:from-gray-700 dark:via-gray-600 dark:to-gray-700 rounded-2xl flex items-center justify-center">
               <div className="text-center">
-                <div className="bg-white/30 dark:bg-gray-600/30 backdrop-blur-sm rounded-2xl p-6 mb-4">
+                <div className="bg-white/30 dark:bg-slate-600/30 backdrop-blur-sm rounded-2xl p-6 mb-4">
                   <svg
-                    className="mx-auto h-12 w-12 text-stone-700 dark:text-gray-300"
+                    className="mx-auto h-12 w-12 text-stone-700 dark:text-slate-300"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -70,7 +70,7 @@ export default function RecipeDetail({ recipe, onBack }: RecipeDetailProps) {
                     />
                   </svg>
                 </div>
-                <p className="text-sm font-medium text-stone-800 dark:text-gray-200">Recipe Image</p>
+                <p className="text-sm font-medium text-stone-800 dark:text-slate-200">Recipe Image</p>
               </div>
             </div>
 
@@ -98,10 +98,10 @@ export default function RecipeDetail({ recipe, onBack }: RecipeDetailProps) {
 
               {/* Recipe Meta */}
               <div className="grid grid-cols-2 gap-4">
-                <div className="bg-stone-100/50 dark:bg-gray-700/50 rounded-2xl p-4">
+                <div className="bg-stone-100/50 dark:bg-slate-700/50 rounded-2xl p-4">
                   <div className="flex items-center space-x-2 mb-2">
                     <svg
-                      className="w-5 h-5 text-stone-600 dark:text-gray-400"
+                      className="w-5 h-5 text-stone-600 dark:text-slate-400"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -122,10 +122,10 @@ export default function RecipeDetail({ recipe, onBack }: RecipeDetailProps) {
                   </p>
                 </div>
 
-                <div className="bg-stone-100/50 dark:bg-gray-700/50 rounded-2xl p-4">
+                <div className="bg-stone-100/50 dark:bg-slate-700/50 rounded-2xl p-4">
                   <div className="flex items-center space-x-2 mb-2">
                     <svg
-                      className="w-5 h-5 text-stone-600 dark:text-gray-400"
+                      className="w-5 h-5 text-stone-600 dark:text-slate-400"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -146,10 +146,10 @@ export default function RecipeDetail({ recipe, onBack }: RecipeDetailProps) {
                   </p>
                 </div>
 
-                <div className="bg-stone-100/50 dark:bg-gray-700/50 rounded-2xl p-4">
+                <div className="bg-stone-100/50 dark:bg-slate-700/50 rounded-2xl p-4">
                   <div className="flex items-center space-x-2 mb-2">
                     <svg
-                      className="w-5 h-5 text-stone-600 dark:text-gray-400"
+                      className="w-5 h-5 text-stone-600 dark:text-slate-400"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -168,10 +168,10 @@ export default function RecipeDetail({ recipe, onBack }: RecipeDetailProps) {
                   <div className="flex items-center space-x-2">
                     <button
                       onClick={() => adjustServings(servings - 1)}
-                      className="w-8 h-8 rounded-full bg-stone-200 dark:bg-gray-600 flex items-center justify-center hover:bg-stone-300 dark:hover:bg-gray-500 transition-colors"
+                      className="w-8 h-8 rounded-full bg-stone-200 dark:bg-slate-600 flex items-center justify-center hover:bg-stone-300 dark:hover:bg-slate-500 transition-colors"
                     >
                       <svg
-                        className="w-4 h-4 text-stone-700 dark:text-gray-300"
+                        className="w-4 h-4 text-stone-700 dark:text-slate-300"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -184,10 +184,10 @@ export default function RecipeDetail({ recipe, onBack }: RecipeDetailProps) {
                     </span>
                     <button
                       onClick={() => adjustServings(servings + 1)}
-                      className="w-8 h-8 rounded-full bg-stone-200 dark:bg-gray-600 flex items-center justify-center hover:bg-stone-300 dark:hover:bg-gray-500 transition-colors"
+                      className="w-8 h-8 rounded-full bg-stone-200 dark:bg-slate-600 flex items-center justify-center hover:bg-stone-300 dark:hover:bg-slate-500 transition-colors"
                     >
                       <svg
-                        className="w-4 h-4 text-stone-700 dark:text-gray-300"
+                        className="w-4 h-4 text-stone-700 dark:text-slate-300"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -198,7 +198,7 @@ export default function RecipeDetail({ recipe, onBack }: RecipeDetailProps) {
                   </div>
                 </div>
 
-                <div className="bg-stone-100/50 dark:bg-gray-700/50 rounded-2xl p-4">
+                <div className="bg-stone-100/50 dark:bg-slate-700/50 rounded-2xl p-4">
                   <div className="flex items-center space-x-2 mb-2">
                     <span className="text-sm font-medium text-stone-700 dark:text-stone-300">
                       {t('recipe.difficulty')}
@@ -215,7 +215,7 @@ export default function RecipeDetail({ recipe, onBack }: RecipeDetailProps) {
                 {recipe.tags.map((tag, index) => (
                   <span
                     key={index}
-                    className="px-3 py-1 bg-gradient-to-r from-stone-100 to-neutral-100 dark:from-gray-700 dark:to-gray-600 text-stone-800 dark:text-gray-200 text-xs font-medium rounded-full border border-stone-200 dark:border-gray-600"
+                    className="px-3 py-1 bg-gradient-to-r from-stone-100 to-neutral-100 dark:from-slate-700 dark:to-slate-600 text-stone-800 dark:text-slate-200 text-xs font-medium rounded-full border border-stone-200 dark:border-slate-600"
                   >
                     {t(`tag.${tag}`)}
                   </span>
@@ -226,9 +226,9 @@ export default function RecipeDetail({ recipe, onBack }: RecipeDetailProps) {
         </div>
 
         {/* Recipe Content Tabs */}
-        <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-3xl border border-stone-200/50 dark:border-gray-700/50 overflow-hidden">
+        <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-3xl border border-stone-200/50 dark:border-slate-700/50 overflow-hidden">
           {/* Tab Navigation */}
-          <div className="flex border-b border-stone-200/50 dark:border-gray-700/50">
+          <div className="flex border-b border-stone-200/50 dark:border-slate-700/50">
             {[
               { id: 'ingredients', label: t('recipe.ingredients'), icon: '🥕' },
               {
@@ -243,8 +243,8 @@ export default function RecipeDetail({ recipe, onBack }: RecipeDetailProps) {
                 onClick={() => setActiveTab(tab.id as 'ingredients' | 'instructions' | 'nutrition')}
                 className={`flex-1 flex items-center justify-center space-x-2 py-4 px-6 transition-colors duration-200 ${
                   activeTab === tab.id
-                    ? 'bg-stone-100/50 dark:bg-gray-700/50 text-stone-800 dark:text-stone-100 border-b-2 border-stone-600 dark:border-gray-400'
-                    : 'text-stone-600 dark:text-gray-400 hover:text-stone-800 dark:hover:text-stone-200'
+                    ? 'bg-stone-100/50 dark:bg-slate-700/50 text-stone-800 dark:text-stone-100 border-b-2 border-stone-600 dark:border-slate-400'
+                    : 'text-stone-600 dark:text-slate-400 hover:text-stone-800 dark:hover:text-stone-200'
                 }`}
               >
                 <span className="text-lg">{tab.icon}</span>
@@ -271,9 +271,9 @@ export default function RecipeDetail({ recipe, onBack }: RecipeDetailProps) {
                     return (
                       <div
                         key={index}
-                        className="flex items-center space-x-4 p-3 bg-stone-50/50 dark:bg-gray-700/50 rounded-xl"
+                        className="flex items-center space-x-4 p-3 bg-stone-50/50 dark:bg-slate-700/50 rounded-xl"
                       >
-                        <div className="w-2 h-2 bg-stone-400 dark:bg-gray-500 rounded-full"></div>
+                        <div className="w-2 h-2 bg-stone-400 dark:bg-slate-500 rounded-full"></div>
                         <span className="font-medium text-stone-800 dark:text-stone-100">
                           {scaledAmount} {ingredient.unit}
                         </span>
@@ -293,7 +293,7 @@ export default function RecipeDetail({ recipe, onBack }: RecipeDetailProps) {
                 <div className="space-y-4">
                   {recipe.instructions.map((instruction, index) => (
                     <div key={index} className="flex space-x-4">
-                      <div className="flex-shrink-0 w-8 h-8 bg-stone-600 dark:bg-gray-600 text-white rounded-full flex items-center justify-center font-bold text-sm">
+                      <div className="flex-shrink-0 w-8 h-8 bg-stone-600 dark:bg-slate-600 text-white rounded-full flex items-center justify-center font-bold text-sm">
                         {index + 1}
                       </div>
                       <p className="text-stone-700 dark:text-stone-300 leading-relaxed">{instruction}</p>
@@ -331,13 +331,13 @@ export default function RecipeDetail({ recipe, onBack }: RecipeDetailProps) {
                 <h3 className="text-xl font-bold text-stone-800 dark:text-stone-100 mb-4">{t('recipe.nutrition')}</h3>
                 <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
                   {Object.entries(recipe.nutrition).map(([key, value]) => (
-                    <div key={key} className="bg-stone-100/50 dark:bg-gray-700/50 rounded-2xl p-4 text-center">
+                    <div key={key} className="bg-stone-100/50 dark:bg-slate-700/50 rounded-2xl p-4 text-center">
                       <p className="text-2xl font-bold text-stone-800 dark:text-stone-100">{value}</p>
-                      <p className="text-sm text-stone-600 dark:text-gray-400 capitalize">{key}</p>
+                      <p className="text-sm text-stone-600 dark:text-slate-400 capitalize">{key}</p>
                     </div>
                   ))}
                 </div>
-                <p className="text-sm text-stone-600 dark:text-gray-400 text-center">
+                <p className="text-sm text-stone-600 dark:text-slate-400 text-center">
                   {t('recipe.nutrition.disclaimer')}
                 </p>
               </div>
