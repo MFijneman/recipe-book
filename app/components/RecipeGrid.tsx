@@ -9,10 +9,10 @@ export default function RecipeGrid({ recipes }: RecipeGridProps) {
   if (recipes.length === 0) {
     return (
       <div className="text-center py-16">
-        <div className="bg-stone-50/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-3xl p-12 border border-stone-200/50 dark:border-gray-700/50 shadow-xl">
+        <div className="bg-stone-50/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-3xl p-12 border border-stone-200/50 dark:border-slate-700/50 shadow-xl">
           <div className="bg-gradient-to-br from-stone-100 to-neutral-100 dark:from-gray-700 dark:to-gray-600 rounded-full w-20 h-20 mx-auto mb-6 flex items-center justify-center">
             <svg
-              className="h-10 w-10 text-stone-700 dark:text-gray-300"
+              className="h-10 w-10 text-stone-700 dark:text-slate-300"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
