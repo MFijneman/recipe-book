@@ -16,67 +16,60 @@ export default function SearchFilters({
   setSelectedDifficulty,
 }: SearchFiltersProps) {
   const { t } = useTranslation();
+
+  const difficulties = [
+    { value: 'All', label: t('filter.all') },
+    { value: 'Easy', label: t('filter.easy') },
+    { value: 'Medium', label: t('filter.medium') },
+    { value: 'Hard', label: t('filter.hard') },
+  ];
+
   return (
-    <div className="max-w-4xl mx-auto mb-12">
-      <div className="bg-stone-100/30 dark:bg-slate-800/30 backdrop-blur-sm rounded-3xl border border-stone-200/50 dark:border-slate-700/50 p-8">
-        <div className="flex flex-col lg:flex-row gap-4">
-          {/* Search Box */}
-          <div className="flex-1">
-            <div className="relative group">
-              <input
-                type="text"
-                id="search"
-                placeholder={t('search.placeholder')}
-                value={searchTerm}
-                onChange={e => setSearchTerm(e.target.value)}
-                className="w-full pl-12 pr-4 py-4 bg-stone-50/80 dark:bg-slate-700/80 backdrop-blur-sm border border-stone-200/50 dark:border-slate-600/50 rounded-2xl focus:ring-4 focus:ring-stone-500/20 dark:focus:ring-slate-500/20 focus:border-stone-600 dark:focus:border-slate-500 transition-all duration-300 text-stone-800 dark:text-stone-200 placeholder-stone-600/60 dark:placeholder-slate-400/60"
-              />
-              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                <svg
-                  className="h-5 w-5 text-stone-600 dark:text-slate-400 group-focus-within:text-stone-700 dark:group-focus-within:text-slate-300 transition-colors duration-300"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                  />
-                </svg>
-              </div>
-            </div>
-          </div>
+    <div className="mb-6 flex flex-wrap items-center gap-3">
+      {/* Search Box */}
+      <div className="relative flex-[1_1_260px]">
+        <svg
+          className="pointer-events-none absolute top-1/2 left-[17px] -translate-y-1/2 text-accent-700"
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.75"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.3-4.3" />
+        </svg>
+        <input
+          type="text"
+          id="search"
+          placeholder={t('search.placeholder')}
+          value={searchTerm}
+          onChange={e => setSearchTerm(e.target.value)}
+          className="min-h-12 w-full rounded-full border border-transparent bg-surface py-2.5 pr-5 pl-[46px] text-[15px] caret-accent placeholder:text-ink/50 focus-visible:border-accent focus-visible:outline-none"
+        />
+      </div>
 
-          {/* Search Button */}
-          <button className="bg-stone-700 dark:bg-slate-600 hover:bg-stone-800 dark:hover:bg-slate-700 text-white px-8 py-4 rounded-2xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
-            <span className="sr-only">{t('search.button')}</span>
-            <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              />
-            </svg>
+      {/* Difficulty Filter */}
+      <div
+        className="inline-flex overflow-hidden rounded-full bg-surface"
+        role="group"
+        aria-label={t('recipe.difficulty')}
+      >
+        {difficulties.map((difficulty, index) => (
+          <button
+            key={difficulty.value}
+            onClick={() => setSelectedDifficulty(difficulty.value)}
+            aria-pressed={selectedDifficulty === difficulty.value}
+            className={`px-5 py-[13px] text-sm transition-colors ${index > 0 ? 'border-l border-ink/15' : ''} ${
+              selectedDifficulty === difficulty.value ? 'bg-accent text-cream' : 'hover:bg-ink/5'
+            }`}
+          >
+            {difficulty.label}
           </button>
-
-          {/* Difficulty Filter */}
-          <div className="lg:w-48">
-            <select
-              id="difficulty"
-              value={selectedDifficulty}
-              onChange={e => setSelectedDifficulty(e.target.value)}
-              className="w-full px-4 py-4 bg-stone-50/80 dark:bg-slate-700/80 backdrop-blur-sm border border-stone-200/50 dark:border-slate-600/50 rounded-2xl focus:ring-4 focus:ring-stone-500/20 dark:focus:ring-slate-500/20 focus:border-stone-600 dark:focus:border-slate-500 transition-all duration-300 text-stone-800 dark:text-stone-200 appearance-none cursor-pointer"
-            >
-              <option value="All">{t('filter.all.difficulties')}</option>
-              <option value="Easy">{t('filter.easy')}</option>
-              <option value="Medium">{t('filter.medium')}</option>
-              <option value="Hard">{t('filter.hard')}</option>
-            </select>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   );

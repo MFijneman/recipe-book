@@ -6,345 +6,286 @@ import { useTranslation } from '@/i18n/useTranslation';
 
 interface RecipeDetailProps {
   recipe: Recipe;
-  onBack: () => void;
 }
 
-export default function RecipeDetail({ recipe, onBack }: RecipeDetailProps) {
+const difficultyTags = {
+  easy: 'bg-sage-100 text-sage-800',
+  medium: 'bg-accent-100 text-accent-800',
+  hard: 'bg-sand-100 text-sand-800',
+};
+
+const nutritionUnits: Record<string, string> = {
+  calories: ' kcal',
+  protein: ' g',
+  carbs: ' g',
+  fat: ' g',
+  fiber: ' g',
+};
+
+function sourceLabel(source: string): string {
+  try {
+    return new URL(source).hostname.replace(/^www\./, '');
+  } catch {
+    return source;
+  }
+}
+
+export default function RecipeDetail({ recipe }: RecipeDetailProps) {
   const [servings, setServings] = useState(recipe.servings);
-  const [activeTab, setActiveTab] = useState<'ingredients' | 'instructions' | 'nutrition'>('ingredients');
   const { t } = useTranslation();
 
   const adjustServings = (newServings: number) => {
     setServings(Math.max(1, newServings));
   };
 
-  const getDifficultyColor = (difficulty: string) => {
-    switch (difficulty) {
-      case 'Easy':
-        return 'bg-gradient-to-r from-emerald-600 to-teal-700 text-white';
-      case 'Medium':
-        return 'bg-gradient-to-r from-amber-600 to-orange-700 text-white';
-      case 'Hard':
-        return 'bg-gradient-to-r from-red-600 to-rose-700 text-white';
-      default:
-        return 'bg-gradient-to-r from-stone-600 to-gray-700 text-white';
+  const baseServings = recipe.servings || 4;
+  const scaledIngredients = recipe.ingredients.map(ingredient => {
+    let amount = ingredient.amount;
+    // Only scale if amount is a number
+    if (!isNaN(Number(ingredient.amount)) && baseServings > 0) {
+      amount = (Number(ingredient.amount) * (servings / baseServings)).toFixed(2).replace(/\.?0+$/, '');
     }
-  };
+    return { qty: `${amount} ${ingredient.unit}`.trim(), name: ingredient.name };
+  });
+
+  const hasNutrition = recipe.nutrition.calories > 0;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-stone-50 via-neutral-50 to-stone-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
-      {/* Back Button */}
-      <div className="sticky top-0 z-40 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm border-b border-stone-200/50 dark:border-slate-700/50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <button
-            onClick={onBack}
-            className="flex items-center space-x-2 text-stone-700 dark:text-stone-300 hover:text-stone-900 dark:hover:text-stone-100 transition-colors duration-200"
-          >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-            <span className="font-medium">{t('recipe.back.to.list')}</span>
-          </button>
+    <div>
+      {/* Recipe Header */}
+      <header className="mx-auto flex max-w-[1160px] flex-wrap items-center gap-9 px-4 py-6">
+        <div className="flex-[1_1_440px]">
+          <div className="mb-3 flex flex-wrap gap-1.5">
+            {recipe.tags.map((tag, index) => (
+              <span
+                key={index}
+                className="rounded-full bg-sage-100 px-2.5 py-[3px] text-[11px] tracking-wide text-sage-800"
+              >
+                {t(`tag.${tag}`)}
+              </span>
+            ))}
+          </div>
+          <h1 className="mb-3 font-heading text-[clamp(32px,4.5vw,50px)] leading-[1.08] tracking-tight text-pretty">
+            {recipe.title}
+          </h1>
+          <p className="max-w-[620px] text-[17px] leading-relaxed text-pretty text-ink/80">{recipe.description}</p>
+          {recipe.source && (
+            <p className="mt-3 text-[13px] text-ink/55">
+              {t('recipe.inspiration')}{' '}
+              <a
+                href={recipe.source}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-accent-700 underline hover:text-accent-600"
+              >
+                {sourceLabel(recipe.source)}
+              </a>
+            </p>
+          )}
+
+          {/* Recipe Meta */}
+          <div className="mt-4 flex flex-wrap gap-2">
+            <span className="inline-flex flex-none items-center gap-2 rounded-full bg-surface px-4 py-2 text-[13.5px] font-semibold whitespace-nowrap">
+              <svg
+                className="text-accent-700"
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.75"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
+              </svg>
+              {t('recipe.prep')} {recipe.prepTime} {t('unit.min')}
+            </span>
+            <span className="inline-flex flex-none items-center gap-2 rounded-full bg-surface px-4 py-2 text-[13.5px] font-semibold whitespace-nowrap">
+              <svg
+                className="text-accent-700"
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.75"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M8 2v2" />
+                <path d="M12 2v2" />
+                <path d="M16 2v2" />
+                <path d="M20 12v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8Z" />
+                <path d="M2 12h20" />
+              </svg>
+              {t('recipe.total')} {recipe.totalTime} {t('unit.min')}
+            </span>
+            <span
+              className={`inline-flex flex-none items-center rounded-full px-4 py-2 text-[13.5px] font-semibold whitespace-nowrap ${difficultyTags[recipe.difficulty]}`}
+            >
+              {t(`difficulity.${recipe.difficulty}`)}
+            </span>
+          </div>
         </div>
-      </div>
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Recipe Header */}
-        <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-3xl border border-stone-200/50 dark:border-slate-700/50 p-8 mb-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Recipe Image */}
-            <div className="h-80 bg-gradient-to-br from-stone-100 via-neutral-100 to-stone-200 dark:from-gray-700 dark:via-gray-600 dark:to-gray-700 rounded-2xl flex items-center justify-center">
-              <div className="text-center">
-                <div className="bg-white/30 dark:bg-slate-600/30 backdrop-blur-sm rounded-2xl p-6 mb-4">
-                  <svg
-                    className="mx-auto h-12 w-12 text-stone-700 dark:text-slate-300"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                    />
-                  </svg>
-                </div>
-                <p className="text-sm font-medium text-stone-800 dark:text-slate-200">Recipe Image</p>
-              </div>
+        {/* Decorative blob */}
+        <div
+          aria-hidden="true"
+          className="relative hidden min-w-[220px] flex-[0_1_300px] items-center justify-center md:flex"
+        >
+          <div
+            className="flex aspect-square w-[min(270px,100%)] items-center justify-center bg-sage-300"
+            style={{ borderRadius: '46% 54% 58% 42% / 52% 48% 52% 48%' }}
+          >
+            <svg
+              className="text-sage-800"
+              width="72"
+              height="72"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.75"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M2 12h20" />
+              <path d="M20 12v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8" />
+              <path d="m4 8 16-4" />
+              <path d="m8.86 6.78-.45-1.81a2 2 0 0 1 1.45-2.43l1.94-.48a2 2 0 0 1 2.43 1.46l.45 1.8" />
+            </svg>
+          </div>
+          <div className="absolute right-2.5 bottom-1.5 h-16 w-16 rounded-full bg-accent"></div>
+        </div>
+      </header>
+
+      <main className="mx-auto flex max-w-[1160px] flex-wrap items-start gap-6 px-4 pt-2 pb-9">
+        {/* Ingredients */}
+        <section className="flex flex-[1_1_300px] flex-col gap-3 rounded-[28px] bg-surface p-6">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <h2 className="font-heading text-[26px]">{t('recipe.ingredients')}</h2>
+            <div className="flex items-center gap-2.5">
+              <button
+                onClick={() => adjustServings(servings - 1)}
+                aria-label="Fewer servings"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-ink/15 bg-cream transition-colors hover:bg-ink/5"
+              >
+                <svg
+                  width="15"
+                  height="15"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.75"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M5 12h14" />
+                </svg>
+              </button>
+              <span className="min-w-[76px] text-center text-sm font-bold">
+                {servings} {t('recipe.servings').toLowerCase()}
+              </span>
+              <button
+                onClick={() => adjustServings(servings + 1)}
+                aria-label="More servings"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-ink/15 bg-cream transition-colors hover:bg-ink/5"
+              >
+                <svg
+                  width="15"
+                  height="15"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.75"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M5 12h14" />
+                  <path d="M12 5v14" />
+                </svg>
+              </button>
             </div>
-
-            {/* Recipe Info */}
-            <div className="space-y-6">
-              <div>
-                <h1 className="text-3xl font-serif font-bold text-stone-800 dark:text-stone-100 mb-3">
-                  {recipe.title}
-                </h1>
-                <p className="text-stone-700 dark:text-stone-300 text-lg leading-relaxed">{recipe.description}</p>
-                {recipe.source && (
-                  <p className="mt-2 text-sm text-stone-500 dark:text-stone-400">
-                    {t('recipe.inspiration')}{' '}
-                    <a
-                      href={recipe.source}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="underline hover:text-stone-700 dark:hover:text-stone-200"
-                    >
-                      {recipe.source}
-                    </a>
-                  </p>
-                )}
+          </div>
+          <div className="flex flex-col">
+            {scaledIngredients.map((ingredient, index) => (
+              <div key={index} className="flex items-baseline gap-2.5 border-b border-ink/15 py-[9px] text-[14.5px]">
+                <span className="h-[7px] w-[7px] flex-none self-center rounded-full bg-accent"></span>
+                <span className="font-bold whitespace-nowrap">{ingredient.qty}</span>
+                <span className="text-ink/80">{ingredient.name}</span>
               </div>
+            ))}
+          </div>
+        </section>
 
-              {/* Recipe Meta */}
-              <div className="grid grid-cols-2 gap-4">
-                <div className="bg-stone-100/50 dark:bg-slate-700/50 rounded-2xl p-4">
-                  <div className="flex items-center space-x-2 mb-2">
-                    <svg
-                      className="w-5 h-5 text-stone-600 dark:text-slate-400"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-                    <span className="text-sm font-medium text-stone-700 dark:text-stone-300">
-                      {t('recipe.prep.time')}
-                    </span>
-                  </div>
-                  <p className="text-lg font-semibold text-stone-800 dark:text-stone-100">
-                    {recipe.prepTime} {t('unit.minutes')}
-                  </p>
-                </div>
-
-                <div className="bg-stone-100/50 dark:bg-slate-700/50 rounded-2xl p-4">
-                  <div className="flex items-center space-x-2 mb-2">
-                    <svg
-                      className="w-5 h-5 text-stone-600 dark:text-slate-400"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-                    <span className="text-sm font-medium text-stone-700 dark:text-stone-300">
-                      {t('recipe.total.time')}
-                    </span>
-                  </div>
-                  <p className="text-lg font-semibold text-stone-800 dark:text-stone-100">
-                    {recipe.totalTime} {t('unit.minutes')}
-                  </p>
-                </div>
-
-                <div className="bg-stone-100/50 dark:bg-slate-700/50 rounded-2xl p-4">
-                  <div className="flex items-center space-x-2 mb-2">
-                    <svg
-                      className="w-5 h-5 text-stone-600 dark:text-slate-400"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-                      />
-                    </svg>
-                    <span className="text-sm font-medium text-stone-700 dark:text-stone-300">
-                      {t('recipe.servings')}
-                    </span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <button
-                      onClick={() => adjustServings(servings - 1)}
-                      className="w-8 h-8 rounded-full bg-stone-200 dark:bg-slate-600 flex items-center justify-center hover:bg-stone-300 dark:hover:bg-slate-500 transition-colors"
-                    >
-                      <svg
-                        className="w-4 h-4 text-stone-700 dark:text-slate-300"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
-                      </svg>
-                    </button>
-                    <span className="text-lg font-semibold text-stone-800 dark:text-stone-100 min-w-[2rem] text-center">
-                      {servings}
-                    </span>
-                    <button
-                      onClick={() => adjustServings(servings + 1)}
-                      className="w-8 h-8 rounded-full bg-stone-200 dark:bg-slate-600 flex items-center justify-center hover:bg-stone-300 dark:hover:bg-slate-500 transition-colors"
-                    >
-                      <svg
-                        className="w-4 h-4 text-stone-700 dark:text-slate-300"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-
-                <div className="bg-stone-100/50 dark:bg-slate-700/50 rounded-2xl p-4">
-                  <div className="flex items-center space-x-2 mb-2">
-                    <span className="text-sm font-medium text-stone-700 dark:text-stone-300">
-                      {t('recipe.difficulty')}
-                    </span>
-                  </div>
-                  <span className={`px-3 py-1 text-xs font-bold rounded-full ${getDifficultyColor(recipe.difficulty)}`}>
-                    {recipe.difficulty}
+        <section className="flex flex-[2_1_440px] flex-col gap-6">
+          {/* Instructions */}
+          <div>
+            <h2 className="mb-4 font-heading text-[26px]">{t('recipe.instructions')}</h2>
+            <div className="flex flex-col gap-4">
+              {recipe.instructions.map((instruction, index) => (
+                <div key={index} className="flex items-start gap-3">
+                  <span className="inline-flex h-8 w-8 flex-none items-center justify-center rounded-[50%_50%_50%_12px] bg-accent text-sm font-bold text-cream">
+                    {index + 1}
                   </span>
+                  <p className="mt-[3px] text-[15px] leading-[1.65] text-pretty text-ink/85">{instruction}</p>
                 </div>
-              </div>
+              ))}
+            </div>
+          </div>
 
-              {/* Tags */}
-              <div className="flex flex-wrap gap-2">
-                {recipe.tags.map((tag, index) => (
-                  <span
-                    key={index}
-                    className="px-3 py-1 bg-gradient-to-r from-stone-100 to-neutral-100 dark:from-slate-700 dark:to-slate-600 text-stone-800 dark:text-slate-200 text-xs font-medium rounded-full border border-stone-200 dark:border-slate-600"
-                  >
-                    {t(`tag.${tag}`)}
-                  </span>
+          {/* Tips */}
+          {recipe.tips.length > 0 && (
+            <div className="rounded-[28px] bg-sage-100 p-6">
+              <h3 className="mb-3 flex items-center gap-2.5 font-heading text-xl text-sage-800">
+                <svg
+                  width="19"
+                  height="19"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.75"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" />
+                  <path d="M9 18h6" />
+                  <path d="M10 22h4" />
+                </svg>
+                {t('recipe.tips')}
+              </h3>
+              <div className="flex flex-col gap-2">
+                {recipe.tips.map((tip, index) => (
+                  <div key={index} className="flex items-start gap-2.5 text-sm leading-relaxed text-sage-800">
+                    <span className="mt-2 h-1.5 w-1.5 flex-none rounded-full bg-sage-600"></span>
+                    <span>{tip}</span>
+                  </div>
                 ))}
               </div>
             </div>
-          </div>
-        </div>
+          )}
 
-        {/* Recipe Content Tabs */}
-        <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-3xl border border-stone-200/50 dark:border-slate-700/50 overflow-hidden">
-          {/* Tab Navigation */}
-          <div className="flex border-b border-stone-200/50 dark:border-slate-700/50">
-            {[
-              { id: 'ingredients', label: t('recipe.ingredients'), icon: '🥕' },
-              {
-                id: 'instructions',
-                label: t('recipe.instructions'),
-                icon: '📝',
-              },
-              { id: 'nutrition', label: t('recipe.nutrition'), icon: '📊' },
-            ].map(tab => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id as 'ingredients' | 'instructions' | 'nutrition')}
-                className={`flex-1 flex items-center justify-center space-x-2 py-4 px-6 transition-colors duration-200 ${
-                  activeTab === tab.id
-                    ? 'bg-stone-100/50 dark:bg-slate-700/50 text-stone-800 dark:text-stone-100 border-b-2 border-stone-600 dark:border-slate-400'
-                    : 'text-stone-600 dark:text-slate-400 hover:text-stone-800 dark:hover:text-stone-200'
-                }`}
-              >
-                <span className="text-lg">{tab.icon}</span>
-                <span className="font-medium">{tab.label}</span>
-              </button>
-            ))}
-          </div>
-
-          {/* Tab Content */}
-          <div className="p-8">
-            {activeTab === 'ingredients' && (
-              <div className="space-y-4">
-                <h3 className="text-xl font-bold text-stone-800 dark:text-stone-100 mb-4">{t('recipe.ingredients')}</h3>
-                <div className="grid gap-3">
-                  {recipe.ingredients.map((ingredient, index) => {
-                    let scaledAmount = ingredient.amount;
-                    const baseServings = recipe.servings || 4;
-                    // Only scale if amount is a number
-                    if (!isNaN(Number(ingredient.amount)) && baseServings > 0) {
-                      scaledAmount = (Number(ingredient.amount) * (servings / baseServings))
-                        .toFixed(2)
-                        .replace(/\.00$/, '');
-                    }
-                    return (
-                      <div
-                        key={index}
-                        className="flex items-center space-x-4 p-3 bg-stone-50/50 dark:bg-slate-700/50 rounded-xl"
-                      >
-                        <div className="w-2 h-2 bg-stone-400 dark:bg-slate-500 rounded-full"></div>
-                        <span className="font-medium text-stone-800 dark:text-stone-100">
-                          {scaledAmount} {ingredient.unit}
-                        </span>
-                        <span className="text-stone-700 dark:text-stone-300">{ingredient.name}</span>
-                      </div>
-                    );
-                  })}
-                </div>
+          {/* Nutrition */}
+          {hasNutrition && (
+            <div>
+              <h2 className="mb-4 font-heading text-[26px]">{t('recipe.nutrition')}</h2>
+              <div className="grid grid-cols-[repeat(auto-fit,minmax(104px,1fr))] gap-3">
+                {Object.entries(recipe.nutrition).map(([key, value]) => (
+                  <div key={key} className="flex flex-col items-center gap-0.5 rounded-[16px] bg-surface px-2 py-4">
+                    <span className="font-heading text-2xl">
+                      {value}
+                      {nutritionUnits[key] ?? ''}
+                    </span>
+                    <span className="text-xs text-ink/60">{t(`recipe.${key}`)}</span>
+                  </div>
+                ))}
               </div>
-            )}
-
-            {activeTab === 'instructions' && (
-              <div className="space-y-6">
-                <h3 className="text-xl font-bold text-stone-800 dark:text-stone-100 mb-4">
-                  {t('recipe.instructions')}
-                </h3>
-                <div className="space-y-4">
-                  {recipe.instructions.map((instruction, index) => (
-                    <div key={index} className="flex space-x-4">
-                      <div className="flex-shrink-0 w-8 h-8 bg-stone-600 dark:bg-slate-600 text-white rounded-full flex items-center justify-center font-bold text-sm">
-                        {index + 1}
-                      </div>
-                      <p className="text-stone-700 dark:text-stone-300 leading-relaxed">{instruction}</p>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Tips */}
-                <div className="mt-8 p-6 bg-amber-50/50 dark:bg-amber-900/20 rounded-2xl border border-amber-200/50 dark:border-amber-800/50">
-                  <h4 className="text-lg font-bold text-amber-800 dark:text-amber-200 mb-3 flex items-center">
-                    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-                    {t('recipe.tips')}
-                  </h4>
-                  <ul className="space-y-2">
-                    {recipe.tips.map((tip, index) => (
-                      <li key={index} className="text-amber-700 dark:text-amber-300 flex items-start space-x-2">
-                        <span className="text-amber-500 dark:text-amber-400 mt-1">•</span>
-                        <span>{tip}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            )}
-
-            {activeTab === 'nutrition' && (
-              <div className="space-y-6">
-                <h3 className="text-xl font-bold text-stone-800 dark:text-stone-100 mb-4">{t('recipe.nutrition')}</h3>
-                <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-                  {Object.entries(recipe.nutrition).map(([key, value]) => (
-                    <div key={key} className="bg-stone-100/50 dark:bg-slate-700/50 rounded-2xl p-4 text-center">
-                      <p className="text-2xl font-bold text-stone-800 dark:text-stone-100">{value}</p>
-                      <p className="text-sm text-stone-600 dark:text-slate-400 capitalize">{key}</p>
-                    </div>
-                  ))}
-                </div>
-                <p className="text-sm text-stone-600 dark:text-slate-400 text-center">
-                  {t('recipe.nutrition.disclaimer')}
-                </p>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
+              <p className="mt-3 text-xs text-ink/55">{t('recipe.nutrition.disclaimer')}</p>
+            </div>
+          )}
+        </section>
+      </main>
     </div>
   );
 }

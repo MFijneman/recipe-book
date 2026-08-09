@@ -1,28 +1,65 @@
 @import 'tailwindcss';
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Organic design-system tokens — tonal ramps generated in OKLCH on one
+   shared lightness scale, so the same step of any role matches in value. */
+@theme {
+  --color-cream: #f5ead8;
+  --color-surface: #ebddc5;
+  --color-ink: #201e1d;
+
+  --color-accent: #c67139;
+  --color-accent-100: #fff2eb;
+  --color-accent-200: #ffe1d0;
+  --color-accent-300: #ffc6a5;
+  --color-accent-400: #f6a06b;
+  --color-accent-500: #d67f48;
+  --color-accent-600: #b2622d;
+  --color-accent-700: #8c491a;
+  --color-accent-800: #643312;
+  --color-accent-900: #402310;
+
+  --color-sage: #7a8a5e;
+  --color-sage-100: #f0fae1;
+  --color-sage-200: #e1eecc;
+  --color-sage-300: #ccdbb2;
+  --color-sage-400: #aebf92;
+  --color-sage-500: #8fa073;
+  --color-sage-600: #728157;
+  --color-sage-700: #56633f;
+  --color-sage-800: #3d472b;
+  --color-sage-900: #272e1b;
+
+  --color-sand-100: #f9f4ed;
+  --color-sand-200: #eee7db;
+  --color-sand-300: #dcd3c4;
+  --color-sand-400: #c0b6a5;
+  --color-sand-500: #a19786;
+  --color-sand-600: #82796a;
+  --color-sand-700: #645c50;
+  --color-sand-800: #474238;
+  --color-sand-900: #2e2b25;
+
+  --shadow-soft: 0 1px 2px color-mix(in srgb, #2e2b25 14%, transparent);
+  --shadow-lift: 0 3px 10px color-mix(in srgb, #2e2b25 16%, transparent);
+  --shadow-float: 0 12px 32px color-mix(in srgb, #2e2b25 22%, transparent);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-/* Dark mode variables - only applied when .dark class is present */
-.dark {
-  --background: #0f0f0f;
-  --foreground: #f5f5f5;
+  --font-heading: var(--font-caprasimo), system-ui, sans-serif;
+  --font-body: var(--font-figtree), system-ui, sans-serif;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-  transition:
-    background-color 0.3s ease,
-    color 0.3s ease;
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-figtree), system-ui, sans-serif;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-accent) 30%, transparent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
 }

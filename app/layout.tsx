@@ -1,15 +1,15 @@
-import { Geist, Geist_Mono } from 'next/font/google';
-import { ThemeProvider } from 'next-themes';
+import { Caprasimo, Figtree } from 'next/font/google';
 import './globals.css';
 import I18nProvider from '@/components/I18nProvider';
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
+const caprasimo = Caprasimo({
+  weight: '400',
+  variable: '--font-caprasimo',
   subsets: ['latin'],
 });
 
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
+const figtree = Figtree({
+  variable: '--font-figtree',
   subsets: ['latin'],
 });
 
@@ -20,10 +20,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
-          <I18nProvider>{children}</I18nProvider>
-        </ThemeProvider>
+      <body className={`${caprasimo.variable} ${figtree.variable} antialiased`}>
+        <I18nProvider>{children}</I18nProvider>
       </body>
     </html>
   );
